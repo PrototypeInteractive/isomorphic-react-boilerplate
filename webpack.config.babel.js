@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import externals from './src/server/utilities/externals';
 
@@ -20,6 +21,7 @@ const baseConfig = {
 export const clientConfig = {
   ...baseConfig,
   entry: [
+    'webpack-hot-middleware/client',
     './src/app/index.js'
   ],
   output: {
@@ -39,8 +41,15 @@ export const clientConfig = {
       title: 'Output Management',
       inject: true,
       template: 'src/app/index.html'
-    })
-  ]
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
+  devServer: {
+    contentBase: './dist/app',
+    hot: true
+  }
 };
 
 export const serverConfig = {
@@ -50,7 +59,7 @@ export const serverConfig = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist/server'),
-    publicPath: './'
+    publicPath: '/'
   },
   module: {
     ...baseConfig.module,
