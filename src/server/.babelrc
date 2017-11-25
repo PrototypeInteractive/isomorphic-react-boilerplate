@@ -1,7 +1,7 @@
 {
     "sourceMaps": true,
     "presets": [
-        ["env", {
+        ["es2015", {
             "targets": {
                 "node": "current"
             }

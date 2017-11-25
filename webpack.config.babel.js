@@ -10,10 +10,7 @@ const baseConfig = {
     rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      use: 'babel-loader',
-      options: {
-        cacheDirectory: true
-      }
+      use: 'babel-loader'
     }]
   },
   plugins: [],

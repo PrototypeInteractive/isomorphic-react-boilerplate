@@ -1,7 +1,9 @@
 {
     "sourceMaps": true,
     "presets": [
-        "env",
+        ["es2015", {
+            "modules": false
+        }],
         "stage-2",
         "react"
     ]
