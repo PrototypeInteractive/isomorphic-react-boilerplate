@@ -1,0 +1,14 @@
+{
+    "extends": "airbnb",
+    "root": true,
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "comma-dangle": ["error", "never"],
+        "no-plusplus": ["error", {
+            "allowForLoopAfterthoughts": true
+        }],
+        "import/no-extraneous-dependencies": "off"
+    }
+}

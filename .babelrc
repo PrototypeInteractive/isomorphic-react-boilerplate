@@ -1,0 +1,7 @@
+/**
+ * Used only for transpiling webpack configuration.
+ */
+
+{
+    "presets": ["env", "stage-2"]
+}
