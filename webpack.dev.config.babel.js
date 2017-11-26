@@ -50,6 +50,9 @@ export const clientConfig = {
   devServer: {
     contentBase: './dist/app',
     hot: true
+  },
+  externals: {
+    jquery: 'jQuery'
   }
 };
 
