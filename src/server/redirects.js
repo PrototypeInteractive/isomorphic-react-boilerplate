@@ -2,14 +2,18 @@
 * Redirect rules
 */
 
+const homepageRedirects = [
+  '/some-unwanted-path',
+  '/another-unwanted-path'
+];
+
 export default (app) => {
-  [
-    '/some-unwanted-path',
-    '/another-unwanted-path'
-  ]
-    .forEach((url) => {
-      app.get(url, (req, res) => {
-        res.redirect(301, '/');
-      });
-    });
+  app.get('*', (req, res, next) => {
+    const redirectToHomepage = homepageRedirects.find(x => x.match(new RegExp(`^${req.path}$`)));
+    if (redirectToHomepage) {
+      res.redirect(301, '/');
+    } else {
+      next();
+    }
+  });
 };
