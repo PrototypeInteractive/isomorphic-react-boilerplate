@@ -41,6 +41,13 @@ export const clientConfig = {
             {
               loader: 'css-loader',
               options: {
+                importLoaders: 1,
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
                 sourceMap: true
               }
             },
