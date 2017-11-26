@@ -42,6 +42,7 @@ export const clientConfig = {
       inject: true,
       template: 'src/app/index.html'
     }),
+    new webpack.NamedModulesPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

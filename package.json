@@ -4,9 +4,11 @@
   "description": "",
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "node ./dist/server/index.js",
-    "build": "webpack --config webpack.config.babel.js",
-    "build:debug": "webpack --config webpack.config.babel.js --display-error-details --display-modules",
+    "start": "rm -R dist && webpack --config webpack.dev.config.babel.js && node ./dist/server/index.js",
+    "build": "webpack --config webpack.dev.config.babel.js",
+    "build:verbose": "webpack --config webpack.dev.config.babel.js --display-error-details --display-modules",
+    "build:static": "webpack --config webpack.static.config.babel.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
     "lint": "node_modules/.bin/eslint src --fix"
   },
   "author": "",
@@ -21,6 +23,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "cross-env": "^5.1.1",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",

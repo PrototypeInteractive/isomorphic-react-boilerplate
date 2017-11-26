@@ -14,7 +14,7 @@ render(Main);
 
 if (module.hot) {
   module.hot.accept('./containers/main', () => {
-    console.log('Accepting the updated module.');
     render(Main);
+    console.log('app: Main module updated.');
   });
 }

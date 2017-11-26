@@ -16,10 +16,18 @@ Minimal ReactJS boilerplate without most of the enterprise-related features.
 - React native application
 - Node.js Express server
 
-## How to start
+## How to start development
 1. npm install
-1. npm run build
 1. npm start
+
+## How to build production (with server)
+1. npm install
+1. npm run build:prod
+
+## How to build static html files (without server)
+1. npm install
+1. npm run build:static
+
 
 ## Technologies
 - Node.js
