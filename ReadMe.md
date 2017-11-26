@@ -1,14 +1,17 @@
 # Minimal React JS Boilerplate
 
 ## Description
-Minimal ReactJS boilerplate without most of the enterprise-related features.
+Unopinionated minimal ReactJS boilerplate.
 
 ## Features
 - Output self-contained react application without server dependency.
 - Alternately, allow serving the application through Node.js Express.
-- Uses webpack for packing and transpiling react, sass, and client assets.
-- Enable Hot Module Replacement (HMR) with development server for faster development.
-- Use es2015 and stage 2 proposal syntax for both client and server code.
+- Uses webpack for packing and transpiling all assets (js, sass, images, etc.).
+- Use es2015 and stage 2 proposal syntax for client, server, and webpack configuration code.
+- Enable Hot Module Replacement (HMR) for all client assets (js, scss, and images).
+- Automatic server reload when any server-related code is modified.
+- Sourcemaps for client and server code and stylesheets for easier debugging.
+- Fully-configured debugging environment for Visual Studio Code (vscode).
 - Ensure consistent coding convention through eslint.
 - Isomorphic JavaScript (pending)
 
