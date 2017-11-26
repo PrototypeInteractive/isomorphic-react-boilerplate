@@ -5,10 +5,10 @@
   "main": "dist/server/index.js",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "server": "rm -R dist && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development node ./dist/server/index.js",
+    "server": "rm -R dist && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development DEBUG=api node ./dist/server/index.js",
     "server:prod": "rm -R dist && webpack --config webpack.prod.config.babel.js; cross-env NODE_ENV=production node ./dist/server/index.js",
     "watch": "rm -R dist && webpack --watch --config webpack.dev.config.babel.js",
-    "nodemon": "cross-env NODE_ENV=development nodemon ./dist/server/index.js",
+    "nodemon": "cross-env NODE_ENV=development DEBUG=api nodemon ./dist/server/index.js",
     "build": "rm -R dist && webpack --config webpack.dev.config.babel.js --display-error-details",
     "build:static": "rm -R dist && webpack --config webpack.static.config.babel.js",
     "build:prod": "rm -R dist && webpack --config webpack.prod.config.babel.js",

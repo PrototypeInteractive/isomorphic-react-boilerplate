@@ -14,7 +14,8 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "development",
+                "DEBUG": "api"
             }
         },
         {
@@ -23,7 +24,8 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}/dist/server/index.js",
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "development",
+                "DEBUG": "api"
             }
         }
     ]

@@ -92,7 +92,7 @@ app.get('*', (req, res) => {
   res.status(404).end();
 });
 
-log('--------------------------');
+log('---------------------------');
 log('☕️ ');
 log('Starting Server');
 log(`Environment: ${process.env.NODE_ENV}`);
