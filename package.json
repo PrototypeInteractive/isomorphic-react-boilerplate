@@ -5,7 +5,8 @@
   "main": "dist/server/index.js",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "run": "rm -R dist && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development node ./dist/server/index.js",
+    "server": "rm -R dist && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development node ./dist/server/index.js",
+    "server:prod": "rm -R dist && webpack --config webpack.prod.config.babel.js; cross-env NODE_ENV=production node ./dist/server/index.js",
     "watch": "rm -R dist && webpack --watch --config webpack.dev.config.babel.js",
     "nodemon": "cross-env NODE_ENV=development nodemon ./dist/server/index.js",
     "build": "rm -R dist && webpack --config webpack.dev.config.babel.js --display-error-details",
@@ -41,6 +42,12 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "express": "^4.16.2"
+    "basic-auth": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "serve-static": "^1.13.1"
   }
 }
