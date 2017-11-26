@@ -36,6 +36,11 @@ npm run server
 
 This will clean the dist folder, run webpack, and start a web server at http://localhost:3000/. This will support Hot Replacement Module (HMR) for the react client application.
 
+### How to start production server
+```shell
+npm run server:prod
+```
+
 ### How to start development server with nodemon
 ```shell
 npm run watch
@@ -46,6 +51,8 @@ npm run nodemon
 ```
 
 This will clean the dist folder, run webpack, and starts a web server that automatically restarts with updated code if any changes are made. The react client application will also support Hot Replacement Module (HMR).
+
+This will clean the dist folder, run webpack in production mode, and start a web server at http://localhost:3000/.
 
 ### How to build for production (with server)
 ```shell
