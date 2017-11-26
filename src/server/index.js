@@ -6,18 +6,23 @@ import { clientConfig, serverConfig } from '../../webpack.dev.config.babel';
 
 const app = express();
 
-const compiler = webpack(clientConfig);
-
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  publicPath: serverConfig.output.publicPath
-}));
-
-app.use(webpackHotMiddleware(compiler));
-
-// Serve the files on port 3000.
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!\n');
+app.get('/health', (req, res) => {
+  res.status(200).end();
 });
 
-console.log('Initializing server.');
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(clientConfig);
+
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: serverConfig.output.publicPath
+  }));
+
+  app.use(webpackHotMiddleware(compiler));
+}
+
+app.listen(process.env.PORT || 3000, (error) => {
+  if (!error) {
+    console.log(`📡  Running on port: ${process.env.PORT || 3000} [${process.env.NODE_ENV}]`);
+  }
+});

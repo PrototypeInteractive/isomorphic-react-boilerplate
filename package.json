@@ -4,12 +4,14 @@
   "description": "",
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "rm -R dist && webpack --config webpack.dev.config.babel.js && node ./dist/server/index.js",
-    "build": "webpack --config webpack.dev.config.babel.js",
-    "build:verbose": "webpack --config webpack.dev.config.babel.js --display-error-details --display-modules",
-    "build:static": "webpack --config webpack.static.config.babel.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
-    "lint": "node_modules/.bin/eslint src --fix"
+    "start": "node ./dist/server/index.js",
+    "run": "rm -R dist && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development node ./dist/server/index.js",
+    "watch": "rm -R dist && webpack --watch --config webpack.dev.config.babel.js",
+    "nodemon": "cross-env NODE_ENV=development nodemon ./dist/server/index.js",
+    "build": "rm -R dist && webpack --config webpack.dev.config.babel.js --display-error-details",
+    "build:static": "rm -R dist && webpack --config webpack.static.config.babel.js",
+    "build:prod": "rm -R dist && webpack --config webpack.prod.config.babel.js",
+    "lint": "node_modules/.bin/eslint ./src --fix"
   },
   "author": "",
   "license": "ISC",
