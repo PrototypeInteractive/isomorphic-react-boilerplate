@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Icon from '../../components/icon';
 import Button from '../../components/button';
+import Logo from '../../assets/images/logo.png';
 
 export default class Main extends Component {
   constructor(props) {
@@ -19,6 +20,12 @@ export default class Main extends Component {
               <h1>Test page!!!</h1>
               <Icon alt="This is an icon!!!" />
               <Button label="This is a button!!!" />
+              <div>
+                <img src={require('../../assets/images/logo.svg')} alt="logo" width="500" height="100" />
+              </div>
+              <div>
+                <img src={Logo} alt="logo" width="500" height="100" />
+              </div>
             </div>
           </div>
         </div>

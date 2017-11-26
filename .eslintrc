@@ -10,6 +10,7 @@
             "allowForLoopAfterthoughts": true
         }],
         "import/no-extraneous-dependencies": "off",
-        "no-script-url": "off"
+        "no-script-url": "off",
+        "global-require": "off"
     }
 }

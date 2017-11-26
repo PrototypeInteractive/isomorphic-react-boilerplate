@@ -63,6 +63,12 @@ export const clientConfig = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
       }
     ]
   },
