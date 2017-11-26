@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Icon extends Component {
-  render() {
-    return (
-      <div className="icon">
-        <span>This is an icon!</span>
-      </div>
-    );
-  }
-}
+const Icon = props => (
+  <div className="icon">
+    <span>{props.alt}</span>
+  </div>
+);
+
+Icon.propTypes = {
+  alt: PropTypes.string
+};
+
+Icon.defaultProps = {
+  alt: ''
+};
+
+export default Icon;

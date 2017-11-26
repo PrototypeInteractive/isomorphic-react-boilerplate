@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Button extends Component {
-  render() {
-    return (
-      <a className="btn">
-        <span>This is a button!!</span>
-      </a>
-    );
-  }
-}
+const Button = props => (
+  <a className="btn btn-default" href={props.href}>
+    <span>{props.label}</span>
+  </a>
+);
+
+Button.propTypes = {
+  href: PropTypes.string,
+  label: PropTypes.string.isRequired
+};
+
+Button.defaultProps = {
+  href: 'javascript: void(0);'
+};
+
+export default Button;

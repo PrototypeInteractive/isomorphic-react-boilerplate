@@ -22,17 +22,41 @@ export const clientConfig = {
   ...baseConfig,
   entry: [
     'webpack-hot-middleware/client',
-    './src/app/index.js'
+    './src/app/index.js',
+    './src/app/assets/sass/style-ltr.scss'
   ],
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist/app'),
     publicPath: '/'
   },
+  resolve: {
+    extensions: [...baseConfig.resolve.extensions, '.scss']
+  },
   module: {
     ...baseConfig.module,
     rules: [
-      ...baseConfig.module.rules
+      ...baseConfig.module.rules,
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
     ]
   },
   plugins: [

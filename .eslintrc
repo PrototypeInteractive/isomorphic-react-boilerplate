@@ -9,6 +9,7 @@
         "no-plusplus": ["error", {
             "allowForLoopAfterthoughts": true
         }],
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "no-script-url": "off"
     }
 }

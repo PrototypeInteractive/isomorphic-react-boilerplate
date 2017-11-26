@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const baseConfig = {
   resolve: {
@@ -30,7 +31,26 @@ export const clientConfig = {
   module: {
     ...baseConfig.module,
     rules: [
-      ...baseConfig.module.rules
+      ...baseConfig.module.rules,
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }]
+        })
+      }
     ]
   },
   plugins: [
@@ -39,6 +59,10 @@ export const clientConfig = {
       title: 'Output Management',
       inject: true,
       template: 'src/app/index.html'
+    }),
+    new ExtractTextPlugin('styles.css', {
+      allChunks: true,
+      disable: process.env.NODE_ENV === 'development'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
