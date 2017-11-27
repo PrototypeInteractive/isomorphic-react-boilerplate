@@ -19,7 +19,7 @@ Unopinionated minimal ReactJS boilerplate.
 - React native application
 - Node.js Express server
 
----
+
 
 ## How to start
 How to build, run, or debug the application.
@@ -68,7 +68,7 @@ npm run build:static
 
 This will clean the dist folder and create an optimized react application inside the /dist/app folder. This build can be run on the browser directly from the file system. To do so, open /dist/app/index.html on the web browser.
 
----
+
 
 ## Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code.
@@ -85,7 +85,7 @@ In Visual Studio Code sidebar, open the Debug view and choose **nodemon** from t
 
 This configuration will automatically restart the Node.js Express server when code changes are made in /src/server while still enabling breakpoints and debugging through Visual Studio Code. In addition to this, code changes made in /src/app will trigger Hot Module Reloading (HMR) updates in the client application.
 
----
+
 
 ## Deployment
 
@@ -94,13 +94,14 @@ This configuration will automatically restart the Node.js Express server when co
 1. pending...
 
 Make sure the correct environment variables are set up
+
 | Variable Name | Values                           | Purpose                                   |
 | ------------- | -------------------------------- | ----------------------------------------- |
 | NODE_ENV      | development, staging, production | Changes the behavior of the webserver     |
-| AUTH_USER     | prototype, *                     | User name used when accessing the website |
-| AUTH_PASS     | prototype, *                     | Password used when accessing the website  |
+| AUTH_USER     | prototype                        | User name used when accessing the website |
+| AUTH_PASS     | prototype                        | Password used when accessing the website  |
 
----
+
 
 ## Technologies
 - Node.js
