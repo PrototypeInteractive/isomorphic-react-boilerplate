@@ -97,8 +97,10 @@ log('☕️ ');
 log('Starting Server');
 log(`Environment: ${process.env.NODE_ENV}`);
 
-app.listen(process.env.PORT || 3000, (error) => {
+const preferredPort = process.env.PORT || 8080;
+
+app.listen(preferredPort, (error) => {
   if (!error) {
-    log(`📡  Running on port: ${process.env.PORT || 3000}`);
+    log(`📡  Running on port: ${preferredPort}`);
   }
 });
