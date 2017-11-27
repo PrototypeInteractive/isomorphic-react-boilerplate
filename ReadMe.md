@@ -116,3 +116,6 @@ Make sure the correct environment variables are set up
 - Webpack
 - Nodemon
 - Gulp???
+
+## TODO:
+- Use babel-eslint for new syntax (static properties, etc.)

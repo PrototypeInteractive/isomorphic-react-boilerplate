@@ -1,10 +1,12 @@
 {
+    "parser": "babel-eslint",
     "extends": "airbnb",
     "root": true,
     "plugins": [
         "import"
     ],
     "rules": {
+        "strict": 0,
         "comma-dangle": ["error", "never"],
         "no-plusplus": ["error", {
             "allowForLoopAfterthoughts": true
