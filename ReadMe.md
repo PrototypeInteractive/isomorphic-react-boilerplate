@@ -116,3 +116,7 @@ Make sure the correct environment variables are set up
 - Webpack
 - Nodemon
 - Gulp???
+
+
+## TODO:
+- Resolve SVG sprite issue on static build when loading the HTML file from the file system.

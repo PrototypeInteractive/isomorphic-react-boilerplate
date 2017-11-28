@@ -18,7 +18,7 @@ export default class Main extends Component {
           <div className="row">
             <div className="col-xs-12">
               <h1>Test page!!!</h1>
-              <Icon alt="This is an icon!!!" />
+              <Icon type="check" width={50} height={50} />
               <Button label="This is a button!!!" />
               <div>
                 <img src={require('../../assets/images/logo.svg')} alt="logo" width="500" height="100" />
