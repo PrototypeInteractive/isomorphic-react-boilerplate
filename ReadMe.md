@@ -30,57 +30,49 @@ How to build, run, or debug the application.
 
 ### How to start development server
 ```shell
-npm run server
+npm run dev
 ```
 
-This will clean the dist folder, run webpack, and start a web server at http://localhost:3000/. This will support Hot Replacement Module (HMR) for the react client application.
+This will clean the dist folder, run webpack, and start a web server at http://localhost:8080/. This will support Hot Replacement Module (HMR) for the react client application. This also automatically restarts the web server if any changes are made in the server source code.
 
-### How to start production server
+### How to build files for production (with server)
 ```shell
-npm run server:prod
-```
-
-### How to start development server with nodemon
-```shell
-npm run watch
-```
-Then from another terminal window, execute:
-```shell
-npm run nodemon
-```
-
-This will clean the dist folder, run webpack, and starts a web server that automatically restarts with updated code if any changes are made. The react client application will also support Hot Replacement Module (HMR).
-
-This will clean the dist folder, run webpack in production mode, and start a web server at http://localhost:3000/.
-
-### How to build for production (with server)
-```shell
-npm run build:prod
+npm run prod
 ```
 
 This will clean the dist folder and create an optimized react and server builds inside /dist folder. The server files will be inside /dist/server.
 
 ### How to build static html files (without server)
 ```shell
-npm run build:static
+npm run static
 ```
 
 This will clean the dist folder and create an optimized react application inside the /dist/app folder. This build can be run on the browser directly from the file system. To do so, open /dist/app/index.html on the web browser.
 
 ## Visual Studio Code Debugging
-The boilerplate has provisions for debugging the Node.js server using Visual Studio Code.
+The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
 
-1. Install **Node Debug 2** from vscode marketplace.
+### Option 1: Attach (simplest)
+
+1. Execute the following inside terminal:
+```shell
+npm run dev
+```
+2. Open debug view in vscode sidebar and choose **Attach** from the configuration dropdown.
+1. Press **F5** on the keyboard at any time to start the debugging session
+
+This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/app files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
+
+Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
+
+### Option 2: Nodemon
+
 1. Execute the following inside terminal:
 ```shell
 npm run watch
 ```
 2. Open debug view in vscode sidebar and choose **nodemon** from the configuration dropdown.
 1. Press **F5** on the keyboard to start the debugging session.
-
-In Visual Studio Code sidebar, open the Debug view and choose **nodemon** from the configuration dropdown. Press **F5** on the keyboard to start the debugging session.
-
-This configuration will automatically restart the Node.js Express server when code changes are made in /src/server while still enabling breakpoints and debugging through Visual Studio Code. In addition to this, code changes made in /src/app will trigger Hot Module Reloading (HMR) updates in the client application.
 
 ## Notes
 ### SVG sprites
@@ -115,7 +107,7 @@ Make sure the correct environment variables are set up
 - Babel
 - Webpack
 - Nodemon
-- Gulp???
+- Hot Module Replacement (HMR)
 
 
 ## TODO:

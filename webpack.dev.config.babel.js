@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackShellPlugin from 'webpack-shell-plugin';
 import externals from './src/server/utilities/externals';
 
 const baseConfig = {
@@ -18,101 +19,116 @@ const baseConfig = {
   devtool: 'source-map'
 };
 
-export const clientConfig = {
-  ...baseConfig,
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
-    './src/app/index.js',
-    './src/app/assets/sass/style-ltr.scss'
-  ],
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist/app'),
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: [...baseConfig.resolve.extensions, '.scss']
-  },
-  module: {
-    ...baseConfig.module,
-    rules: [
-      ...baseConfig.module.rules,
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              sourceMap: true
+export const clientConfig = env => {
+  return {
+    ...baseConfig,
+    entry: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client',
+      './src/app/index.js',
+      './src/app/assets/sass/style-ltr.scss'
+    ],
+    output: {
+      filename: 'main.js',
+      path: path.resolve(__dirname, 'dist/app'),
+      publicPath: '/'
+    },
+    resolve: {
+      extensions: [...baseConfig.resolve.extensions, '.scss']
+    },
+    module: {
+      ...baseConfig.module,
+      rules: [
+        ...baseConfig.module.rules,
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
             }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      }
-    ]
-  },
-  plugins: [
-    ...baseConfig.plugins,
-    new HtmlWebpackPlugin({
-      title: 'Output Management',
-      inject: true,
-      template: 'src/app/index.html'
-    }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ],
-  devServer: {
-    contentBase: './dist/app',
-    hot: true
-  },
-  externals: {
-    jquery: 'jQuery'
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        }
+      ]
+    },
+    plugins: [
+      ...baseConfig.plugins,
+      new HtmlWebpackPlugin({
+        title: 'Output Management',
+        inject: true,
+        template: 'src/app/index.html'
+      }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
+    ],
+    devServer: {
+      contentBase: './dist/app',
+      hot: true
+    },
+    externals: {
+      jquery: 'jQuery'
+    }
   }
 };
 
-export const serverConfig = {
-  ...baseConfig,
-  entry: './src/server/index.js',
-  target: 'node',
-  output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist/server'),
-    publicPath: '/'
-  },
-  module: {
-    ...baseConfig.module,
-    rules: [
-      ...baseConfig.module.rules
-    ]
-  },
-  plugins: [
+
+
+export const serverConfig = env => {
+  const plugins = [
     ...baseConfig.plugins
-  ],
-  externals
+  ];
+
+  if (env && env.debug) {
+    plugins.push(new WebpackShellPlugin({
+      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --inspect=9229 --debug-brk ./dist/server/index.js'],
+      dev: true
+    }));
+  }
+
+  return {
+    ...baseConfig,
+    entry: './src/server/index.js',
+    target: 'node',
+    output: {
+      filename: 'index.js',
+      path: path.resolve(__dirname, 'dist/server'),
+      publicPath: '/'
+    },
+    module: {
+      ...baseConfig.module,
+      rules: [
+        ...baseConfig.module.rules
+      ]
+    },
+    plugins: plugins,
+    externals
+  }
 };
 
 export default [
