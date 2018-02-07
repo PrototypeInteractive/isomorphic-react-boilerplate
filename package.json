@@ -5,8 +5,8 @@
   "main": "dist/server/index.js",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "server": "npm run prebuild && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development DEBUG=api node ./dist/server/index.js",
-    "server:prod": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js; cross-env NODE_ENV=production node ./dist/server/index.js",
+    "dev": "npm run prebuild && webpack --config webpack.dev.config.babel.js; cross-env NODE_ENV=development DEBUG=api node ./dist/server/index.js",
+    "prod": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js; cross-env NODE_ENV=production node ./dist/server/index.js",
     "watch": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js",
     "nodemon": "cross-env NODE_ENV=development DEBUG=api nodemon ./dist/server/index.js",
     "build": "npm run prebuild && webpack --config webpack.dev.config.babel.js --display-error-details",

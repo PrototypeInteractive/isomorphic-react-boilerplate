@@ -21,6 +21,7 @@ const baseConfig = {
 export const clientConfig = {
   ...baseConfig,
   entry: [
+    'react-hot-loader/patch',
     'webpack-hot-middleware/client',
     './src/app/index.js',
     './src/app/assets/sass/style-ltr.scss'

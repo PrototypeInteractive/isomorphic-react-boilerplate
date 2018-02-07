@@ -1,21 +1,22 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader'
 import Main from './containers/main';
 import './assets/sass/style-rtl.scss';
 
-const render = (Component) => {
+const render = Component => {
   ReactDOM.render(
-    <Component />,
+    <AppContainer>
+      <Component />
+    </AppContainer>,
     document.getElementById('app'),
-  );
-};
+  )
+}
 
-render(Main);
+render(Main)
 
+// Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./containers/main', () => {
-    render(Main);
-    console.log('app: Main module updated.');
-  });
+  module.hot.accept('./containers/main', () => { render(Main) })
 }

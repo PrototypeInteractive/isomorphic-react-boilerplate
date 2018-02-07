@@ -1,7 +1,3 @@
-/**
- * Used only for transpiling webpack configuration.
- */
-
 {
     "presets": [
         "es2015",

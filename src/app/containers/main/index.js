@@ -8,7 +8,18 @@ export default class Main extends Component {
     super(props);
 
     this.state = {
+      title: 'Test page!!!'
     };
+
+    this.onButtonClick = this.onButtonClick.bind(this);
+  }
+
+  onButtonClick(e)
+  {
+    e.preventDefault();
+    this.setState({
+      title: 'Updated page!!!'
+    })
   }
 
   render() {
@@ -17,9 +28,9 @@ export default class Main extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1>Test page!!!</h1>
+              <h1>{this.state.title}</h1>
               <Icon type="check" width={50} height={50} />
-              <Button label="This is a button!!!" />
+              <Button label="This is a button!!!" onClick={this.onButtonClick} />
               <div>
                 <img src={require('../../assets/images/logo.svg')} alt="logo" width="500" height="100" />
               </div>
