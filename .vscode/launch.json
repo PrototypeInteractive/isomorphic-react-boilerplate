@@ -6,16 +6,6 @@
     "configurations": [
         {
             "type": "node",
-            "request": "attach",
-            "name": "Attach",
-            "address": "127.0.0.1",
-            "port": 9229,
-            "localRoot": "${workspaceFolder}",
-            "outFiles": [ "${workspaceFolder}/dist/**/*.js" ],
-            "restart": true
-        },
-        {
-            "type": "node",
             "request": "launch",
             "name": "Nodemon",
             "runtimeExecutable": "nodemon",

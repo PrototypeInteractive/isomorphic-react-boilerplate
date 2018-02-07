@@ -69,11 +69,11 @@ if (process.env.NODE_ENV === 'development') {
 
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: serverConfig.output.publicPath
+    publicPath: clientConfig.output.publicPath
   }));
 
   app.use(webpackHotMiddleware(compiler));
-  log('Running webpack dev and hot middleware!!!!')
+  log('Running webpack dev and hot middleware!')
 } else {
   app.use(serveStatic('dist/app', {
     index: ['index.html'],

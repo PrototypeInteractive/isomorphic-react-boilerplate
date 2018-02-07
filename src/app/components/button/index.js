@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Button = props => (
   <a className="btn btn-default" href={props.href} onClick={props.onClick}>
-    <span>_{props.label}</span>
+    <span>{props.label}</span>
   </a>
 );
 

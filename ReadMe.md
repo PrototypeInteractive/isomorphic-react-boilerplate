@@ -52,27 +52,16 @@ This will clean the dist folder and create an optimized react application inside
 ## Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
 
-### Option 1: Attach (simplest)
-
-1. Execute the following inside terminal:
-```shell
-npm run dev
-```
-2. Open debug view in vscode sidebar and choose **Attach** from the configuration dropdown.
-1. Press **F5** on the keyboard at any time to start the debugging session
-
-This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/app files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
-
-Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
-
-### Option 2: Nodemon
-
 1. Execute the following inside terminal:
 ```shell
 npm run watch
 ```
-2. Open debug view in vscode sidebar and choose **nodemon** from the configuration dropdown.
-1. Press **F5** on the keyboard to start the debugging session.
+2. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
+1. Press **F5** on the keyboard to start the debugging session
+
+This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/app files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
+
+Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
 
 ## Notes
 ### SVG sprites

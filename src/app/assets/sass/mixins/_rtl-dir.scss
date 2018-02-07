@@ -1,0 +1,399 @@
+
+// ------------------------------------------
+// bi app mixins
+// authors:
+// twitter.com/anasnakawa
+// twitter.com/victorzamfir
+// licensed under the MIT license
+// http://www.opensource.org/licenses/mit-license.php
+// ------------------------------------------
+// ------------------------------------------
+// Table of contents
+// ------------------------------------------
+// padding
+// margin
+// float
+// text align
+// clear
+// left / right
+// border
+//  - width
+//  - style
+//  - color
+//  - generic
+//  - radius
+// ltr / rtl contents
+// ------------------------------------------
+// generic mixin for properties with values
+// (top right bottom left)
+// ------------------------------------------
+
+@mixin bi-app-compact($property, $top, $right, $bottom, $left) {
+    [dir="ltr"] & {
+        #{$property}: $top $right $bottom $left;
+    }
+    [dir="rtl"] & {
+        #{$property}: $top $left $bottom $right;
+    }
+}
+
+// padding
+// ------------------------------------------
+@mixin padding-left($distance) {
+    [dir="ltr"] & {
+        padding-left: $distance;
+    }
+    [dir="rtl"] & {
+        padding-right: $distance;
+    }
+}
+
+@mixin padding-right($distance) {
+    [dir="ltr"] & {
+        padding-right: $distance;
+    }
+    [dir="rtl"] & {
+        padding-left: $distance;
+    }
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+    @include bi-app-compact(padding, $top, $right, $bottom, $left);
+}
+
+// margin
+// ------------------------------------------
+@mixin margin-left($distance) {
+    [dir="ltr"] & {
+        margin-left: $distance;
+    }
+    [dir="rtl"] & {
+        margin-right: $distance;
+    }
+}
+
+@mixin margin-right($distance) {
+    [dir="ltr"] & {
+        margin-right: $distance;
+    }
+    [dir="rtl"] & {
+        margin-left: $distance;
+    }
+}
+
+@mixin margin($top, $right, $bottom, $left) {
+    @include bi-app-compact(margin, $top, $right, $bottom, $left);
+}
+
+// float
+// ------------------------------------------
+@mixin bi-app-float-left($important: '') {
+    [dir="ltr"] & {
+        float: left  unquote($important);
+    }
+    [dir="rtl"] & {
+        float: right  unquote($important);
+    }
+}
+
+@mixin bi-app-float-right($important: '') {
+    [dir="ltr"] & {
+        float: right  unquote($important);
+    }
+    [dir="rtl"] & {
+        float: left  unquote($important);
+    }
+}
+
+@mixin float($direction, $important: '') {
+    @if $direction==left {
+        @include bi-app-float-left($important);
+    }
+    @else if $direction==right {
+        @include bi-app-float-right($important);
+    }
+    @else {
+        float: $direction;
+    }
+}
+
+// text align
+// ------------------------------------------
+@mixin bi-app-text-align-left {
+    [dir="ltr"] & {
+        text-align: left;
+    }
+    [dir="rtl"] & {
+        text-align: right;
+    }
+}
+
+@mixin bi-app-text-align-right {
+    [dir="ltr"] & {
+        text-align: right;
+    }
+    [dir="rtl"] & {
+        text-align: left;
+    }
+}
+
+@mixin text-align($direction) {
+    @if $direction==left {
+        @include bi-app-text-align-left;
+    }
+    @else if $direction==right {
+        @include bi-app-text-align-right;
+    }
+    @else {
+        text-align: $direction;
+    }
+}
+
+// clear
+// ------------------------------------------
+@mixin bi-app-clear-left {
+    [dir="ltr"] & {
+        clear: left;
+    }
+    [dir="rtl"] & {
+        clear: right;
+    }
+}
+
+@mixin bi-app-clear-right {
+    [dir="ltr"] & {
+        clear: right;
+    }
+    [dir="rtl"] & {
+        clear: left;
+    }
+}
+
+@mixin clear($direction) {
+    @if $direction==left {
+        @include bi-app-clear-left;
+    }
+    @else if $direction==right {
+        @include bi-app-clear-right;
+    }
+    @else {
+        clear: $direction;
+    }
+}
+
+// left / right
+// ------------------------------------------
+@mixin left($distance) {
+    [dir="ltr"] & {
+        left: $distance;
+    }
+    [dir="rtl"] & {
+        right: $distance;
+    }
+}
+
+@mixin right($distance) {
+    [dir="ltr"] & {
+        right: $distance;
+    }
+    [dir="rtl"] & {
+        left: $distance;
+    }
+}
+
+// border
+// ------------------------------------------
+// width
+@mixin border-left-width($width) {
+    [dir="ltr"] & {
+        border-left-width: $width;
+    }
+    [dir="rtl"] & {
+        border-right-width: $width;
+    }
+}
+
+@mixin border-right-width($width) {
+    [dir="ltr"] & {
+        border-right-width: $width;
+    }
+    [dir="rtl"] & {
+        border-left-width: $width;
+    }
+}
+
+@mixin border-width($top, $right, $bottom, $left) {
+    @include bi-app-compact(border-width, $top, $right, $bottom, $left);
+}
+
+// style
+@mixin border-left-style($style) {
+    [dir="ltr"] & {
+        border-left-style: $style;
+    }
+    [dir="rtl"] & {
+        border-right-style: $style;
+    }
+}
+
+@mixin border-right-style($style) {
+    [dir="ltr"] & {
+        border-right-width: $style;
+    }
+    [dir="rtl"] & {
+        border-left-width: $style;
+    }
+}
+
+@mixin border-style($top, $right, $bottom, $left) {
+    @include bi-app-compact(border-style, $top, $right, $bottom, $left);
+}
+
+// color
+@mixin border-left-color($color) {
+    [dir="ltr"] & {
+        border-left-color: $color;
+    }
+    [dir="rtl"] & {
+        border-right-color: $color;
+    }
+}
+
+@mixin border-right-color($color) {
+    [dir="ltr"] & {
+        border-right-color: $color;
+    }
+    [dir="rtl"] & {
+        border-left-color: $color;
+    }
+}
+
+@mixin border-color($top, $right, $bottom, $left) {
+    @include bi-app-compact(border-color, $top, $right, $bottom, $left);
+}
+
+// generic
+@mixin border-left($border-style) {
+    [dir="ltr"] & {
+        border-left: $border-style;
+    }
+    [dir="rtl"] & {
+        border-right: $border-style;
+    }
+}
+
+@mixin border-right($border-style) {
+    [dir="ltr"] & {
+        border-right: $border-style;
+    }
+    [dir="rtl"] & {
+        border-left: $border-style;
+    }
+}
+
+// radius
+@mixin border-top-left-radius($radius) {
+    [dir="ltr"] & {
+        border-top-left-radius: $radius;
+    }
+    [dir="rtl"] & {
+        border-top-right-radius: $radius;
+    }
+}
+
+@mixin border-top-right-radius($radius) {
+    [dir="ltr"] & {
+        border-top-right-radius: $radius;
+    }
+    [dir="rtl"] & {
+        border-top-left-radius: $radius;
+    }
+}
+
+@mixin border-bottom-left-radius($radius) {
+    [dir="ltr"] & {
+        border-bottom-left-radius: $radius;
+    }
+    [dir="rtl"] & {
+        border-bottom-right-radius: $radius;
+    }
+}
+
+@mixin border-bottom-right-radius($radius) {
+    [dir="ltr"] & {
+        border-bottom-right-radius: $radius;
+    }
+    [dir="rtl"] & {
+        border-bottom-left-radius: $radius;
+    }
+}
+
+@mixin border-right-radius($radius) {
+    @include border-top-right-radius($radius);
+    @include border-bottom-right-radius($radius);
+}
+
+@mixin border-left-radius($radius) {
+    @include border-top-left-radius($radius);
+    @include border-bottom-left-radius($radius);
+}
+
+@mixin border-top-radius($radius) {
+    @include border-top-left-radius($radius);
+    @include border-top-right-radius($radius);
+}
+
+@mixin border-bottom-radius($radius) {
+    @include border-bottom-left-radius($radius);
+    @include border-bottom-right-radius($radius);
+}
+
+@mixin border-radius($topLeft, $topRight: null, $bottomRight: null, $bottomLeft: null) {
+    @if $topRight !=null {
+        @include border-top-left-radius($topLeft);
+        @include border-top-right-radius($topRight);
+        @include border-bottom-right-radius($bottomRight);
+        @include border-bottom-left-radius($bottomLeft);
+    }
+    @else {
+        -webkit-border-radius: $topLeft;
+        -moz-border-radius: $topLeft;
+        -ms-border-radius: $topLeft;
+        -o-border-radius: $topLeft;
+        border-radius: $topLeft;
+    }
+}
+
+// Support for "direction" declaration (renders ltr/rtl).
+// Useful for form elements as they swap the text-indent property and align the text accordingly.
+@mixin direction {
+    [dir="ltr"] & {
+        direction: ltr;
+    }
+    [dir="rtl"] & {
+        direction: rtl;
+    }
+}
+
+// ltr / rtl contents
+// ------------------------------------------
+@mixin ltr {
+    [dir="ltr"] & {
+        @content;
+    }
+}
+
+@mixin rtl {
+    [dir="rtl"] & {
+        @content;
+    }
+}
+
+@mixin dir-translate3d( $x, $y, $z, $any-transform:scaleZ(1)) {
+    [dir="ltr"] & {
+        transform: translate3d( $x, $y, $z) $any-transform;
+    }
+    [dir="rtl"] & {
+        transform: translate3d( -$x, $y, $z) $any-transform;
+    }
+}

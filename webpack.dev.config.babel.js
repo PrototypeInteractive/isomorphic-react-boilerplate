@@ -19,94 +19,93 @@ const baseConfig = {
   devtool: 'source-map'
 };
 
-export const clientConfig = env => {
-  return {
-    ...baseConfig,
-    entry: [
-      'react-hot-loader/patch',
-      'webpack-hot-middleware/client',
-      './src/app/index.js',
-      './src/app/assets/sass/style-ltr.scss'
-    ],
-    output: {
-      filename: 'main.js',
-      path: path.resolve(__dirname, 'dist/app'),
-      publicPath: '/'
-    },
-    resolve: {
-      extensions: [...baseConfig.resolve.extensions, '.scss']
-    },
-    module: {
-      ...baseConfig.module,
-      rules: [
-        ...baseConfig.module.rules,
-        {
-          test: /\.scss$/,
-          use: [
-            {
-              loader: 'style-loader'
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
+export const clientConfig = {
+  ...baseConfig,
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    './src/app/index.js',
+    './src/app/assets/sass/style-ltr.scss'
+  ],
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist/app'),
+    publicPath: '/'
+  },
+  resolve: {
+    extensions: [...baseConfig.resolve.extensions, '.scss']
+  },
+  module: {
+    ...baseConfig.module,
+    rules: [
+      ...baseConfig.module.rules,
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true
             }
-          ]
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader'
-          ]
-        }
-      ]
-    },
-    plugins: [
-      ...baseConfig.plugins,
-      new HtmlWebpackPlugin({
-        title: 'Output Management',
-        inject: true,
-        template: 'src/app/index.html'
-      }),
-      new webpack.NamedModulesPlugin(),
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
-    ],
-    devServer: {
-      contentBase: './dist/app',
-      hot: true
-    },
-    externals: {
-      jquery: 'jQuery'
-    }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
+  },
+  plugins: [
+    ...baseConfig.plugins,
+    new HtmlWebpackPlugin({
+      title: 'Output Management',
+      inject: true,
+      template: 'src/app/index.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
+  devServer: {
+    contentBase: './dist/app',
+    hot: true
+  },
+  externals: {
+    jquery: 'jQuery'
   }
 };
 
 
 
 export const serverConfig = env => {
+
   const plugins = [
     ...baseConfig.plugins
   ];
 
-  if (env && env.debug) {
+  if (env && env.dev) {
     plugins.push(new WebpackShellPlugin({
-      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --inspect=9229 --debug-brk ./dist/server/index.js'],
+      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon ./dist/server/index.js'],
       dev: true
     }));
   }
@@ -126,7 +125,7 @@ export const serverConfig = env => {
         ...baseConfig.module.rules
       ]
     },
-    plugins: plugins,
+    plugins,
     externals
   }
 };

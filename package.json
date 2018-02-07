@@ -5,10 +5,10 @@
   "main": "dist/server/index.js",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "dev": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js --env.debug",
+    "watch": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js",
+    "dev": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js --env.dev",
     "static": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.static.config.babel.js",
     "prod": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
-    "watch": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js",
     "prebuild": "rm -rf dist && npm run svgstore",
     "svgstore": "svgstore -o ./src/app/assets/images/icons.svg -p 'icon-' ./src/app/assets/icons/*.svg",
     "lint": "node_modules/.bin/eslint ./src --fix"
