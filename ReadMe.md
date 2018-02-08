@@ -25,7 +25,6 @@ How to build, run, or debug the application.
 ### Prerequisites
 - Install Node.js
 - Install Nodemon by executing `npm install nodemon -g`
-- Install svgstore-cli by executing `npm install svgstore-cli -g`
 - Execute `npm init` inside terminal.
 
 ### How to start development server
