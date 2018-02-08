@@ -59,7 +59,24 @@ export const clientConfig = {
         })
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.svg$/,
+        use: [
+          "babel-loader",
+          {
+            loader: "react-svg-loader",
+            options: {
+              svgo: {
+                plugins: [{
+                  removeTitle: true
+                }],
+                floatPrecision: 2
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         use: [
           'file-loader'
         ]

@@ -90,5 +90,3 @@ $RECYCLE.BIN/
 !.elasticbeanstalk/*.global.yml
 
 #Boilerplate
-
-/src/app/assets/images/icons.svg

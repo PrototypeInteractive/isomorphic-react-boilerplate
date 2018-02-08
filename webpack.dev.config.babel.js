@@ -41,11 +41,9 @@ export const clientConfig = {
       ...baseConfig.module.rules,
       {
         test: /\.scss$/,
-        use: [
-          {
+        use: [{
             loader: 'style-loader'
-          },
-          {
+          }, {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
@@ -57,8 +55,7 @@ export const clientConfig = {
             options: {
               sourceMap: true
             }
-          },
-          {
+          }, {
             loader: 'sass-loader',
             options: {
               sourceMap: true
@@ -67,7 +64,24 @@ export const clientConfig = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.svg$/,
+        use: [
+          "babel-loader",
+          {
+            loader: "react-svg-loader",
+            options: {
+              svgo: {
+                plugins: [{
+                  removeTitle: true
+                }],
+                floatPrecision: 2
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         use: [
           'file-loader'
         ]
