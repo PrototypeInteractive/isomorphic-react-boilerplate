@@ -63,11 +63,6 @@ This configuration will attach the vscode debugger to the running node express s
 
 Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
 
-## Notes
-### SVG sprites
-Whenever build scripts are executed, svgstore is executed to process SVG files stored inside `./src/app/assets/icons` directory and combines them into a single SVG file stored inside `./src/app/assets/images/icons.svg`. The generated `icons.svg` is not committed into source control and is only used as an intermediary file which is used by webpack to compile into the /dist/app directory.
-
-
 ## Deployment
 
 ### Amazon Web Services (AWS)
@@ -97,7 +92,3 @@ Make sure the correct environment variables are set up
 - Webpack
 - Nodemon
 - Hot Module Replacement (HMR)
-
-
-## TODO:
-- Resolve SVG sprite issue on static build when loading the HTML file from the file system.
