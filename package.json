@@ -5,7 +5,7 @@
   "main": "dist/server/index.js",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "watch": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js",
+    "debug": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js --env.debug",
     "dev": "npm run prebuild && webpack --watch --config webpack.dev.config.babel.js --env.dev",
     "static": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.static.config.babel.js",
     "prod": "npm run prebuild && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",

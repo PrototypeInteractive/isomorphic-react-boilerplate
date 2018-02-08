@@ -54,7 +54,7 @@ The boilerplate has provisions for debugging the Node.js server using Visual Stu
 
 1. Execute the following inside terminal:
 ```shell
-npm run watch
+npm run debug
 ```
 2. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
 1. Press **F5** on the keyboard to start the debugging session
