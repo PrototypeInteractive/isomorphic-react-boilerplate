@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'
 import Main from './containers/main';
-import './assets/sass/style-rtl.scss';
+import './assets/sass/style.scss';
 
 const render = Component => {
   ReactDOM.render(
