@@ -1,10 +1,10 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import Main from './containers/main';
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './app';
 import configurStore from './state/configureStore';
 import './assets/sass/style.scss';
 
@@ -21,9 +21,9 @@ const render = Component => {
   )
 }
 
-render(Main)
+render(App)
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./containers/main', () => { render(Main) })
+  module.hot.accept('./app', () => { render(App) })
 }

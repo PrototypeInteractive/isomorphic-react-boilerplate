@@ -13,6 +13,9 @@ Unopinionated minimal ReactJS boilerplate.
 - Sourcemaps for client and server code and stylesheets for easier debugging.
 - Fully-configured debugging environment for Visual Studio Code (vscode).
 - Ensure consistent coding convention through eslint.
+- Redux for global state management
+- Built-in router for URL management
+- Localization (pending)
 - Isomorphic JavaScript (pending)
 
 ## Application contents
@@ -91,3 +94,6 @@ Make sure the correct environment variables are set up
 - Webpack
 - Nodemon
 - Hot Module Replacement (HMR)
+- Redux
+- Router
+- React Helmet
