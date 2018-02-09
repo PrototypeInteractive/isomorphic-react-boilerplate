@@ -94,6 +94,9 @@ export const clientConfig = {
       inject: true,
       template: 'src/app/index.html'
     }),
+    new webpack.DefinePlugin({
+      'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
