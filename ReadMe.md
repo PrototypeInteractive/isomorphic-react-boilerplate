@@ -15,7 +15,7 @@ Unopinionated minimal ReactJS boilerplate.
 - Ensure consistent coding convention through eslint.
 - Redux for global state management
 - Built-in router for URL management
-- Localization (pending)
+- URL and text localization
 - Isomorphic JavaScript (pending)
 
 ## Application contents
@@ -96,4 +96,4 @@ Make sure the correct environment variables are set up
 - Hot Module Replacement (HMR)
 - Redux
 - Router
-- React Helmet
+- Helmet
