@@ -5,10 +5,29 @@ import Helmet from 'react-helmet';
 import Main from './containers/main';
 import InnerPage from './containers/inner-page';
 import { NotFound } from './containers/errors';
+import Utilities from './common/utiltiies';
+import Labels from './assets/strings/labels.json';
+import { setLabels } from './state/app-data/actions';
 
 export class Routes extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      labels: {}
+    }
+  }
+
+  componentDidMount() {
+    const labels = Utilities.getLabels(Labels, this.props.lang);
+    this.props.setLabels(labels);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.lang !== nextProps.lang) {
+      const labels = Utilities.getLabels(Labels, nextProps.lang);
+      this.props.setLabels(labels);
+    }
   }
 
   render() {
@@ -20,9 +39,7 @@ export class Routes extends Component {
 
     return (
       <div className="app-root">
-        <Helmet titleTemplate="%s - Website Name" defaultTitle="Home">
-          <meta name="description" content="Lorem ipsum dolor sit amet" />
-        </Helmet>
+        <Helmet titleTemplate="%s - Website Name" />
         <Switch>
           <Route path="/ar" render={() => (
             <Helmet htmlAttributes={{ lang: 'ar', dir: 'rtl' }} />
@@ -43,9 +60,11 @@ export class Routes extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+  setLabels: (data) => dispatch(setLabels(data)),
 });
 
 const mapStateToProps = state => ({
+  strings: state.strings
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

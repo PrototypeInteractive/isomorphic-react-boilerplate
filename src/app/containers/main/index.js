@@ -57,14 +57,17 @@ export class Main extends Component {
               <h1>{this.state.title}</h1>
               <h2>{this.props.userData.name}</h2>
               <h2>{this.props.appData.version}</h2>
+              <h2>{this.props.appData.labels.LocalizedTitle}</h2>
               <CheckIcon width={50} height={50} />
-              <div><Button label="Change title" onClick={this.onButtonClick} /></div>
-              <div><Button label="Change name" onClick={this.onButton2Click} /></div>
-              <div><Button label="Change version" onClick={this.onButton3Click} /></div>
+              <div><Button label="Change title (state)" onClick={this.onButtonClick} /></div>
+              <div><Button label="Change name (redux)" onClick={this.onButton2Click} /></div>
+              <div><Button label="Change version (redux)" onClick={this.onButton3Click} /></div>
+              <br />
               <div><Link to={`${this.props.basePath}/inner-page`}>Inner page</Link></div>
               <div><Link to="/">English</Link></div>
               <div><Link to="/ar">Arabic</Link></div>
               <div><Link to={`${this.props.basePath}/asdf`}>404</Link></div>
+              <br />
               <div>
                 <LogoIcon width={500} height={100} />
               </div>

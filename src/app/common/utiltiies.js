@@ -1,12 +1,12 @@
 const Utilities = {
-  getLabels: culture => {
-    const labels = {};
+  getLabels: (labels, culture) => {
+    const result = {};
 
-    Object.keys(Labels).forEach(key => {
-      labels[key] = Labels[key][culture];
+    Object.keys(labels).forEach(key => {
+      result[key] = labels[key][culture];
     });
 
-    return labels;
+    return result;
   },
   getCultureInfo: () => ({
     lang: (document.documentElement.lang || '').trim() || 'en',
