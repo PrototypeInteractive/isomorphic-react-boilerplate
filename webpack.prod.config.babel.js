@@ -22,11 +22,11 @@ const baseConfig = {
 export const clientConfig = {
   ...baseConfig,
   entry: [
-    './src/app/index.js'
+    './src/client/index.js'
   ],
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist/app'),
+    path: path.resolve(__dirname, 'dist/client'),
     publicPath: '/'
   },
   module: {
@@ -89,7 +89,7 @@ export const clientConfig = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       inject: true,
-      template: 'src/app/index.html'
+      template: 'src/client/index.html'
     }),
     new ExtractTextPlugin('styles.css', {
       allChunks: true,
@@ -112,7 +112,7 @@ export const clientConfig = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
   devServer: {
-    contentBase: './dist/app',
+    contentBase: './dist/client',
     hot: true
   },
   externals: {

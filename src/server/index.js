@@ -75,7 +75,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
   log('Running webpack dev and hot middleware!')
 } else {
-  app.use(serveStatic('dist/app', {
+  app.use(serveStatic('dist/client', {
     index: ['index.html'],
     dotfiles: 'ignore',
     maxAge: process.env.NODE_ENV === 'production' ? '7d' : '0d',

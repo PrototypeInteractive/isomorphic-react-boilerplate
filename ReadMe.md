@@ -49,7 +49,7 @@ This will clean the dist folder and create an optimized react and server builds 
 npm run static
 ```
 
-This will clean the dist folder and create an optimized react application inside the /dist/app folder. This build can be run on the browser directly from the file system. To do so, open /dist/app/index.html on the web browser.
+This will clean the dist folder and create an optimized react application inside the /dist/client folder. This build can be run on the browser directly from the file system. To do so, open /dist/client/index.html on the web browser.
 
 ## Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
@@ -61,7 +61,7 @@ npm run debug
 2. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
 1. Press **F5** on the keyboard to start the debugging session
 
-This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/app files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
+This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/client files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
 
 Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
 
