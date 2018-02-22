@@ -8,7 +8,8 @@ import serveStatic from 'serve-static';
 import debug from 'debug';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import { clientConfig, serverConfig } from '../../webpack.dev.config.babel';
+import 'babel-polyfill';
+import { clientConfig } from '../../webpack.dev.config.babel';
 import redirects from './redirects';
 
 const log = debug('api');
@@ -73,8 +74,9 @@ if (process.env.NODE_ENV === 'development') {
   }));
 
   app.use(webpackHotMiddleware(compiler));
-  log('Running webpack dev and hot middleware!')
-} else {
+  log('Running webpack dev and hot middleware!');
+}
+else {
   app.use(serveStatic('dist/client', {
     index: ['index.html'],
     dotfiles: 'ignore',

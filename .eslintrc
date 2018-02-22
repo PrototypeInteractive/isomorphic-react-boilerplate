@@ -13,6 +13,12 @@
         }],
         "import/no-extraneous-dependencies": "off",
         "no-script-url": "off",
-        "global-require": "off"
+        "global-require": "off",
+        "max-len": ["warn", { "code": 200 }],
+        "import/no-named-as-default": "off",
+        "brace-style": ["warn", "stroustrup"],
+        "arrow-parens": ["off"],
+        "no-unused-expressions": "off",
+        "no-shadow": "off"
     }
 }
