@@ -77,6 +77,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
 
   app.use(webpackHotMiddleware(compiler));
+
   logger.info('Running webpack dev and hot middleware!');
 }
 else {

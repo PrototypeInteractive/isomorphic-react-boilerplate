@@ -21,13 +21,20 @@ const baseConfig = {
 
 export const clientConfig = {
   ...baseConfig,
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
-    './src/client/index.js'
-  ],
+  entry: {
+    client: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client',
+      './src/client/index.js'
+    ],
+    admin: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client',
+      './src/admin/index.js'
+    ]
+  },
   output: {
-    filename: 'main.js',
+    filename: 'main.[name].js',
     path: path.resolve(__dirname, 'dist/client'),
     publicPath: '/'
   },
@@ -90,9 +97,16 @@ export const clientConfig = {
   plugins: [
     ...baseConfig.plugins,
     new HtmlWebpackPlugin({
-      title: 'Output Management',
       inject: true,
-      template: 'src/client/index.html'
+      chunks: ['client'],
+      template: 'src/client/index.html',
+      filename: './index.html'
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      chunks: ['admin'],
+      template: 'src/admin/index.html',
+      filename: './admin/index.html'
     }),
     new webpack.DefinePlugin({
       'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -103,7 +117,7 @@ export const clientConfig = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
   devServer: {
-    contentBase: './dist/client',
+    contentBase: './dist',
     hot: true
   },
   externals: {

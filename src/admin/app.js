@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; // TODO: Use HashRouter if BrowserRouter is not supported (in static build)
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Routes from './routes';
 
 export class App extends Component {
@@ -15,8 +15,8 @@ export class App extends Component {
       <Router>
         {/* Define cultures. */}
         <Switch>
-          <Route path="/ar" render={(props) => <Routes basePath="/ar" lang="ar" {...props} />} />
-          <Route path="/" render={(props) => <Routes basePath="" lang="en" {...props} />} />
+          <Route path="/admin/ar" render={(props) => <Routes basePath="/admin/ar" lang="ar" {...props} />} />
+          <Route path="/admin" render={(props) => <Routes basePath="/admin" lang="en" {...props} />} />
         </Switch>
       </Router>
     );
