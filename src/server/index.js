@@ -5,14 +5,13 @@ import compression from 'compression';
 import auth from 'basic-auth';
 import bodyParser from 'body-parser';
 import serveStatic from 'serve-static';
-import debug from 'debug';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import 'babel-polyfill';
+import logger from './common/logger';
 import { clientConfig } from '../../webpack.dev.config.babel';
 import redirects from './redirects';
 
-const log = debug('api');
 const app = express();
 
 app.get('/health', (req, res) => {
@@ -45,7 +44,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', true);
 
   if (process.env.NODE_ENV !== 'production') {
@@ -66,6 +65,7 @@ app.get('/robots.txt', (req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.raw({ limit: 2 * 1024 * 1024, type: 'application/octet-stream' })); // File uploads capped to 2 MB
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(clientConfig);
@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
 
   app.use(webpackHotMiddleware(compiler));
-  log('Running webpack dev and hot middleware!');
+  logger.info('Running webpack dev and hot middleware!');
 }
 else {
   app.use(serveStatic('dist/client', {
@@ -97,15 +97,15 @@ app.get('*', (req, res) => {
   res.status(404).end();
 });
 
-log('---------------------------');
-log('☕️ ');
-log('Starting Server');
-log(`Environment: ${process.env.NODE_ENV}`);
+logger.info('---------------------------');
+logger.info('☕️ ');
+logger.info('Starting Server');
+logger.info(`Environment: ${process.env.NODE_ENV}`);
 
 const preferredPort = process.env.PORT || 8080;
 
 app.listen(preferredPort, (error) => {
   if (!error) {
-    log(`📡  Running on port: ${preferredPort}`);
+    logger.info(`📡  Running on port: ${preferredPort}`);
   }
 });
