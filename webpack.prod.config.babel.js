@@ -62,9 +62,9 @@ export const clientConfig = {
       {
         test: /\.svg$/,
         use: [
-          "babel-loader",
+          'babel-loader',
           {
-            loader: "react-svg-loader",
+            loader: 'react-svg-loader',
             options: {
               svgo: {
                 plugins: [{

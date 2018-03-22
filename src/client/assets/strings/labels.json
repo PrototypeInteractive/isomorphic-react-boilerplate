@@ -2,5 +2,9 @@
     "LocalizedTitle": {
         "en": "Localized Title",
         "ar": "عنوان مترجم"
+    },
+    "WebsiteName": {
+        "en": "Website Name",
+        "ar": "اسم الموقع"
     }
 }

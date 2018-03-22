@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import App from './app';
 import configurStore from './state/configureStore';
 import './assets/sass/style.scss';
@@ -18,12 +17,14 @@ const render = Component => {
       </AppContainer>
     </Provider>,
     document.getElementById('app'),
-  )
-}
+  );
+};
 
-render(App)
+render(App);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./app', () => { render(App) })
+  module.hot.accept('./app', () => {
+    render(App);
+  });
 }

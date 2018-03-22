@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
@@ -8,9 +9,19 @@ import LogoIcon from '../../assets/images/logo.svg';
 import CheckIcon from '../../assets/icons/check.svg';
 import { setVersion } from '../../state/app-data/actions';
 import { setName } from '../../state/user-data/actions';
-import Utilities from '../../common/utiltiies';
 
 export class Main extends Component {
+  static propTypes = {
+    // Redux
+    setName: PropTypes.func.isRequired,
+    setVersion: PropTypes.func.isRequired,
+    appData: PropTypes.object.isRequired,
+    userData: PropTypes.object.isRequired,
+
+    // Component
+    basePath: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -23,22 +34,19 @@ export class Main extends Component {
     this.onButton3Click = this.onButton3Click.bind(this);
   }
 
-  onButtonClick(e)
-  {
+  onButtonClick(e) {
     e.preventDefault();
     this.setState({
       title: 'Updated page!!!'
-    })
+    });
   }
 
-  onButton2Click(e)
-  {
+  onButton2Click(e) {
     e.preventDefault();
     this.props.setName('New name');
   }
 
-  onButton3Click(e)
-  {
+  onButton3Click(e) {
     e.preventDefault();
     this.props.setVersion('1.2.3');
   }

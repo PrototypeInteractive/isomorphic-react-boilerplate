@@ -1,17 +1,16 @@
+/* eslint-disable react/prefer-stateless-function */
+
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import Button from '../../components/button';
-import Logo from '../../assets/images/logo.png';
-import LogoIcon from '../../assets/images/logo.svg';
-import CheckIcon from '../../assets/icons/check.svg';
 import { setVersion } from '../../state/app-data/actions';
 import { setName } from '../../state/user-data/actions';
 
 export class InnerPage extends Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    basePath: PropTypes.string.isRequired
   }
 
   render() {

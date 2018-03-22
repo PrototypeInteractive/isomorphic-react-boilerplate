@@ -1,6 +1,4 @@
-import { connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistStore } from 'redux-persist';
 import ReduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -10,13 +8,11 @@ const middleware = [thunk, ReduxPromise];
 
 if (process.env.CLIENT_ENV === 'development') {
   const logger = createLogger();
-  middleware.push(logger)
+  middleware.push(logger);
 }
 
 export default function configureStore() {
-  const store = compose(applyMiddleware(...middleware))(
-    createStore
-  )(reducers);
+  const store = compose(applyMiddleware(...middleware))(createStore)(reducers);
 
   return store;
 }

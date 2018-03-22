@@ -35,7 +35,8 @@ if (process.env.NODE_ENV !== 'production') {
       res.statusCode = 401;
       res.setHeader('WWW-Authenticate', 'Basic realm="prototype"');
       res.end('Unauthorized');
-    } else {
+    }
+    else {
       next();
     }
   });
@@ -57,7 +58,8 @@ app.use((req, res, next) => {
 app.get('/robots.txt', (req, res, next) => {
   if (process.env.NODE_ENV !== 'production') {
     res.end();
-  } else {
+  }
+  else {
     next();
   }
 });

@@ -41,33 +41,33 @@ export const clientConfig = {
       {
         test: /\.scss$/,
         use: [{
-            loader: 'style-loader'
-          }, {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            sourceMap: true
           }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true
+          }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }
         ]
       },
       {
         test: /\.svg$/,
         use: [
-          "babel-loader",
+          'babel-loader',
           {
-            loader: "react-svg-loader",
+            loader: 'react-svg-loader',
             options: {
               svgo: {
                 plugins: [{
@@ -111,10 +111,7 @@ export const clientConfig = {
   }
 };
 
-
-
 export const serverConfig = env => {
-
   const plugins = [
     ...baseConfig.plugins
   ];
@@ -143,7 +140,7 @@ export const serverConfig = env => {
     },
     plugins,
     externals
-  }
+  };
 };
 
 export default [

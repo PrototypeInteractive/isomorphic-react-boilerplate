@@ -12,7 +12,8 @@ export default (app) => {
     const redirectToHomepage = homepageRedirects.find(x => x.match(new RegExp(`^${req.path}$`)));
     if (redirectToHomepage) {
       res.redirect(301, '/');
-    } else {
+    }
+    else {
       next();
     }
   });

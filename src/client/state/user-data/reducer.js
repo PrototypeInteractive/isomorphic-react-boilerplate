@@ -1,6 +1,4 @@
-import {
-  SET_NAME
-} from './actions';
+import { SET_NAME } from './actions';
 
 const initState = {
   name: 'temp'

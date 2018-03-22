@@ -1,14 +1,13 @@
+/* eslint-disable react/prefer-stateless-function */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Helmet from 'react-helmet';
-import Main from './containers/main';
-import InnerPage from './containers/inner-page';
 import Routes from './routes';
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    // TODO: Initialize culture-agnostic global settings here
   }
 
   render() {
@@ -24,10 +23,10 @@ export class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({ // eslint-disable-line no-unused-vars
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
