@@ -10,6 +10,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import 'babel-polyfill';
 import logger from './common/logger';
 import { clientConfig } from '../../webpack.dev.config.babel';
+import apiv1 from './api/v1';
 import redirects from './redirects';
 
 const app = express();
@@ -92,6 +93,8 @@ else {
 }
 
 redirects(app);
+
+apiv1(app);
 
 app.get('*', (req, res) => {
   res.status(404).end();
