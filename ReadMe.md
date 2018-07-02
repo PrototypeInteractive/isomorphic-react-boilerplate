@@ -28,26 +28,24 @@ How to build, run, or debug the application.
 ### Prerequisites
 - Install Node.js
 - Install Nodemon by executing `npm install nodemon -g`
-- Execute `npm init` inside terminal.
+
+### Quick Start
+Execute the following in the terminal/command line:
+- `npm install`
+- `npm run dev`
 
 ### How to start development server
-```shell
-npm run dev
-```
+`npm run dev`
 
 This will clean the dist folder, run webpack, and start a web server at http://localhost:8080/. This will support Hot Replacement Module (HMR) for the react client application. This also automatically restarts the web server if any changes are made in the server source code.
 
 ### How to build files for production (with server)
-```shell
-npm run prod
-```
+`npm run prod`
 
 This will clean the dist folder and create an optimized react and server builds inside /dist folder. The server files will be inside /dist/server.
 
 ### How to build static html files (without server)
-```shell
-npm run static
-```
+`npm run static`
 
 This will clean the dist folder and create an optimized react application inside the /dist/client folder. This build can be run on the browser directly from the file system. To do so, open /dist/client/index.html on the web browser.
 
@@ -55,9 +53,7 @@ This will clean the dist folder and create an optimized react application inside
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
 
 1. Execute the following inside terminal:
-```shell
-npm run debug
-```
+`npm run debug`
 2. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
 1. Press **F5** on the keyboard to start the debugging session
 
@@ -68,8 +64,9 @@ Note though that in this approach, the debugger is attached after the server has
 ## Deployment
 
 ### Amazon Web Services (AWS)
-1. run `eb init`
-1. pending...
+1. Run `eb init`
+1. Choose the correct environment
+1. Run `eb deploy`
 
 Make sure the correct environment variables are set up
 
