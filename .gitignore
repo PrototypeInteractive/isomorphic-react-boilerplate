@@ -90,3 +90,5 @@ $RECYCLE.BIN/
 !.elasticbeanstalk/*.global.yml
 
 #Boilerplate
+prod-bundle-stats.html
+static-bundle-stats.html

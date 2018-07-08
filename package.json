@@ -7,8 +7,8 @@
     "start": "node ./dist/server/index.js",
     "debug": "rm -rf dist && webpack --watch --config webpack.dev.config.babel.js --env.debug",
     "dev": "rm -rf dist && webpack --watch --config webpack.dev.config.babel.js --env.dev",
-    "static": "rm -rf dist && cross-env NODE_ENV=production webpack --config webpack.static.config.babel.js",
-    "prod": "rm -rf dist && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
+    "static": "rm -rf dist && cross-env NODE_ENV=production webpack -p --config webpack.static.config.babel.js",
+    "prod": "rm -rf dist && cross-env NODE_ENV=production webpack -p --config webpack.prod.config.babel.js",
     "lint": "node_modules/.bin/eslint ./src --fix"
   },
   "author": "",
@@ -48,7 +48,8 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.19.1",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
