@@ -7,3 +7,12 @@
 @import "../../../../node_modules/bootstrap/scss/transitions";
 @import "../../../../node_modules/bootstrap/scss/media";
 @import "../../../../node_modules/bootstrap/scss/utilities";
+
+// Does not support RTL by default, add overrides here to enable RTL
+
+body {
+    text-align: initial; // reboot.scss hard-codes text-align: left
+}
+caption {
+    text-align: initial; // reboot.scss hard-codes text-align: left
+}
