@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import Visualizer from 'webpack-visualizer-plugin';
 
 const baseConfig = {
   resolve: {
@@ -116,7 +117,15 @@ export const clientConfig = {
       comments: false,
       sourceMap: true
     }),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new Visualizer({
+      filename: '../../static-bundle-stats.html'
+    })
   ],
   externals: {
     jquery: 'jQuery'

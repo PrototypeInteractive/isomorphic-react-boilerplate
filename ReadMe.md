@@ -43,11 +43,12 @@ This will clean the dist folder, run webpack, and start a web server at http://l
 `npm run prod`
 
 This will clean the dist folder and create an optimized react and server builds inside /dist folder. The server files will be inside /dist/server.
-
+Also a `prod-bundle-stats.html` file will be created in the project root, this file shows an analysis for what included in the bundle
 ### How to build static html files (without server)
 `npm run static`
 
 This will clean the dist folder and create an optimized react application inside the /dist/client folder. This build can be run on the browser directly from the file system. To do so, open /dist/client/index.html on the web browser.
+Also a `static-bundle-stats.html` file will be created in the project root, this file shows an analysis for what included in the bundle
 
 ## Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
