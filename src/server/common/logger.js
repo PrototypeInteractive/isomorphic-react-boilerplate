@@ -1,40 +1,53 @@
 import winston from 'winston';
 import moment from 'moment';
 import fs from 'fs';
+import config from '../config';
 
 const date = moment();
 const timestamp = date.format('YYYY-MM-DD_hh-mm-ss');
 
-// Create logs directory if it doesn't exist
-fs.mkdir('./logs', () => { });
+fs.mkdir('./logs', () => { /* no-op */ });
 
-winston.configure({
-  transports: [
-    new (winston.transports.Console)({
-      level: 'info',
-      timestamp: true,
-      colorize: true,
-      humanReadableUnhandledException: true
-    }),
-    new (winston.transports.File)({
-      filename: `./logs/${timestamp}_log.log`,
-      level: 'info',
-      timestamp: true,
-      maxsize: 1024 * 1024 * 10, // 10 MB rolling log files
-      prettyPrint: true,
-      json: false
-    })
-  ]
-});
+const logger = winston.createLogger();
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.colorize(),
+      winston.format.splat(),
+      winston.format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+    ),
+    level: config.logLevel || 'error'
+  }));
+}
+else {
+  logger.add(new winston.transports.File({
+    format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.splat(),
+      winston.format.printf(info => `${info.timestamp} - ${info.level}: ${info.message}`)
+    ),
+    filename: `./logs/${timestamp}_log.log`,
+    level: config.logLevel || 'error',
+    maxsize: 1024 * 1024 * 10 // 10 MB rolling log files
+  }));
+}
 
 export default {
-  info: message => {
-    winston.log('info', message);
+  debug: (...args) => {
+    logger.log('debug', ...args);
   },
-  warn: message => {
-    winston.log('warn', message);
+  verbose: (...args) => {
+    logger.log('verbose', ...args);
   },
-  error: message => {
-    winston.log('error', message);
+  info: (...args) => {
+    logger.log('info', ...args);
+  },
+  warn: (...args) => {
+    logger.log('warn', ...args);
+  },
+  error: (...args) => {
+    logger.log('error', ...args);
   }
 };

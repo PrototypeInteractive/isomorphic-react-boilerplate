@@ -1,11 +1,15 @@
 {
     "sourceMaps": true,
     "presets": [
-        ["es2015", {
+        ["@babel/preset-env", {
             "targets": {
                 "node": "current"
             }
-        }],
-        "stage-2"
+        }]
+    ],
+    "plugins": [
+        "@babel/plugin-transform-async-to-generator",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread"
     ]
 }

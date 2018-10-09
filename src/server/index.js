@@ -72,7 +72,7 @@ if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(clientConfig);
 
   app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
+    logLevel: 'error',
     publicPath: clientConfig.output.publicPath
   }));
 

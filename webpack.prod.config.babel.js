@@ -1,7 +1,7 @@
 import path from 'path';
-import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import postcssRTL from 'postcss-rtl';
 import Visualizer from 'webpack-visualizer-plugin';
 import externals from './src/server/utilities/externals';
 
@@ -17,7 +17,8 @@ const baseConfig = {
     }]
   },
   plugins: [],
-  devtool: 'source-map'
+  devtool: 'source-map',
+  mode: 'production'
 };
 
 export const clientConfig = {
@@ -37,29 +38,31 @@ export const clientConfig = {
       ...baseConfig.module.rules,
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            }]
-        })
+        use: [{
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            sourceMap: true
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: [
+              postcssRTL()
+            ],
+            sourceMap: true
+          }
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }]
       },
       {
         test: /\.svg$/,
@@ -100,34 +103,21 @@ export const clientConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
-    new ExtractTextPlugin('styles.css', {
-      allChunks: true,
-      disable: process.env.NODE_ENV === 'development'
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false,
-      sourceMap: true
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
     new Visualizer({
       filename: '../../prod-bundle-stats.html'
     })
   ],
+  optimization: {
+    minimizer: [new TerserPlugin({
+      terserOptions: {
+        sourceMap: true,
+        mangle: true,
+        ie8: false,
+        keep_fnames: true
+      }
+    })],
+    noEmitOnErrors: true
+  },
   devServer: {
     contentBase: './dist',
     hot: true

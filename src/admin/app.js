@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 import Routes from './routes';
 
 export class App extends Component {
@@ -29,4 +30,6 @@ const mapDispatchToProps = dispatch => ({ // eslint-disable-line no-unused-vars
 const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+const reduxApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default hot(module)(reduxApp);

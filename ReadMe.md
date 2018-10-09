@@ -26,15 +26,16 @@ Unopinionated minimal ReactJS boilerplate.
 How to build, run, or debug the application.
 
 ### Prerequisites
-- Install Node.js
+- Install Node.js (>= v8.9.0)
 - Install Nodemon by executing `npm install nodemon -g`
+- Execute `npm install` inside terminal.
 
 ### Quick Start
 Execute the following in the terminal/command line:
 - `npm install`
 - `npm run dev`
 
-### How to start development server
+### How to start development serve\r
 `npm run dev`
 
 This will clean the dist folder, run webpack, and start a web server at http://localhost:8080/. This will support Hot Replacement Module (HMR) for the react client application. This also automatically restarts the web server if any changes are made in the server source code.

@@ -12,18 +12,22 @@ const baseConfig = {
     rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      use: 'babel-loader'
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true,
+        plugins: ['react-hot-loader/babel']
+      }
     }]
   },
   plugins: [],
-  devtool: 'source-map'
+  devtool: 'source-map',
+  mode: 'development'
 };
 
 export const clientConfig = {
   ...baseConfig,
   entry: {
     client: [
-      'react-hot-loader/patch',
       'webpack-hot-middleware/client',
       './src/client/index.js'
     ],
@@ -66,8 +70,7 @@ export const clientConfig = {
           options: {
             sourceMap: true
           }
-        }
-        ]
+        }]
       },
       {
         test: /\.svg$/,
@@ -111,10 +114,8 @@ export const clientConfig = {
     new webpack.DefinePlugin({
       'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.NamedModulesPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
     contentBase: './dist',
