@@ -1,7 +1,6 @@
 import winston from 'winston';
 import moment from 'moment';
 import fs from 'fs';
-import config from '../config';
 
 const date = moment();
 const timestamp = date.format('YYYY-MM-DD_hh-mm-ss');
@@ -18,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
       winston.format.splat(),
       winston.format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
     ),
-    level: config.logLevel || 'error'
+    level: process.env.LOG_LEVEL || 'error'
   }));
 }
 else {
@@ -29,7 +28,7 @@ else {
       winston.format.printf(info => `${info.timestamp} - ${info.level}: ${info.message}`)
     ),
     filename: `./logs/${timestamp}_log.log`,
-    level: config.logLevel || 'error',
+    level: process.env.LOG_LEVEL || 'error',
     maxsize: 1024 * 1024 * 10 // 10 MB rolling log files
   }));
 }

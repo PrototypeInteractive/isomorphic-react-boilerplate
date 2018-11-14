@@ -6,4 +6,9 @@ export default (app) => {
 
   tools(app, urlPrefix);
   data(app, urlPrefix);
+
+  // Show 404 for unhandled api requests at this point
+  app.get(`${urlPrefix}/*`, (req, res) => {
+    res.status(404).end();
+  });
 };
