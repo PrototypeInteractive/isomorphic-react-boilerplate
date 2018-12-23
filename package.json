@@ -7,8 +7,8 @@
     "start": "node ./dist/server/index.js",
     "debug": "shx --silent rm -rf dist && webpack --watch --config webpack.dev.config.babel.js --env.debug",
     "dev": "shx --silent rm -rf dist && webpack --watch --config webpack.dev.config.babel.js --env.dev",
-    "static": "shx --silent rm -rf dist && cross-env NODE_ENV=production webpack -p --config webpack.static.config.babel.js",
-    "prod": "shx --silent rm -rf dist && cross-env NODE_ENV=production webpack -p --config webpack.prod.config.babel.js",
+    "static": "shx --silent rm -rf dist && cross-env NODE_ENV=production webpack --config webpack.static.config.babel.js",
+    "prod": "shx --silent rm -rf dist && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
     "lint": "node_modules/.bin/eslint ./src --fix"
   },
   "author": "",

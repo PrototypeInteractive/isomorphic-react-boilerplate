@@ -21,7 +21,7 @@ const baseConfig = {
   mode: 'production'
 };
 
-export const clientConfig = {
+export const publicConfig = {
   ...baseConfig,
   entry: {
     client: ['./src/client/index.js'],
@@ -29,7 +29,7 @@ export const clientConfig = {
   },
   output: {
     filename: 'main.[name].js',
-    path: path.resolve(__dirname, 'dist/client'),
+    path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
   module: {
@@ -109,8 +109,8 @@ export const clientConfig = {
   ],
   optimization: {
     minimizer: [new TerserPlugin({
+      sourceMap: true,
       terserOptions: {
-        sourceMap: true,
         mangle: true,
         ie8: false,
         keep_fnames: true
@@ -149,6 +149,6 @@ export const serverConfig = {
 };
 
 export default [
-  clientConfig,
+  publicConfig,
   serverConfig
 ];

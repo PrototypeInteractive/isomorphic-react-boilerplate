@@ -10,11 +10,12 @@ import { setName } from '../../state/user-data/actions';
 
 export class InnerPage extends Component {
   static propTypes = {
-    basePath: PropTypes.string.isRequired
+    basePath: PropTypes.string.isRequired,
+    rootPath: PropTypes.string.isRequired
   }
 
   render() {
-    const { basePath } = this.props;
+    const { basePath, rootPath } = this.props;
 
     return (
       <section className="innerPage">
@@ -28,8 +29,8 @@ export class InnerPage extends Component {
             <div className="col-xs-12">
               <h1>Inner Admin Page!</h1>
               <div><Link to={`${basePath}/`}>Home</Link></div>
-              <div><Link to="/inner-page">English</Link></div>
-              <div><Link to="/ar/inner-page">Arabic</Link></div>
+              <div><Link to={`${rootPath}/inner-page`}>English</Link></div>
+              <div><Link to={`${rootPath}/ar/inner-page`}>Arabic</Link></div>
             </div>
           </div>
         </div>

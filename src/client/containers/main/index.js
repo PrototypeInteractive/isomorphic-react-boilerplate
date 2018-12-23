@@ -19,7 +19,8 @@ export class Main extends Component {
     userData: PropTypes.object.isRequired,
 
     // Component
-    basePath: PropTypes.string.isRequired
+    basePath: PropTypes.string.isRequired,
+    rootPath: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -57,7 +58,7 @@ export class Main extends Component {
 
   render() {
     const {
-      userData, appData, basePath
+      userData, appData, basePath, rootPath
     } = this.props;
 
     const {
@@ -84,8 +85,8 @@ export class Main extends Component {
               <div><Button label="Change version (redux)" onClick={this.onButton3Click} /></div>
               <br />
               <div><Link to={`${basePath}/inner-page`}>Inner page</Link></div>
-              <div><Link to="/">English</Link></div>
-              <div><Link to="/ar">Arabic</Link></div>
+              <div><Link to={`${rootPath}/`}>English</Link></div>
+              <div><Link to={`${rootPath}/ar`}>Arabic</Link></div>
               <div><Link to={`${basePath}/asdf`}>404</Link></div>
               <br />
               <div>

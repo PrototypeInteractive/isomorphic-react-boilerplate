@@ -24,7 +24,7 @@ const baseConfig = {
   mode: 'development'
 };
 
-export const clientConfig = {
+export const publicConfig = {
   ...baseConfig,
   entry: {
     client: [
@@ -32,14 +32,13 @@ export const clientConfig = {
       './src/client/index.js'
     ],
     admin: [
-      'react-hot-loader/patch',
       'webpack-hot-middleware/client',
       './src/admin/index.js'
     ]
   },
   output: {
     filename: 'main.[name].js',
-    path: path.resolve(__dirname, 'dist/client'),
+    path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
   resolve: {
@@ -159,6 +158,6 @@ export const serverConfig = env => {
 };
 
 export default [
-  clientConfig,
+  publicConfig,
   serverConfig
 ];

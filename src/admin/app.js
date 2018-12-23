@@ -8,7 +8,7 @@ import Routes from './routes';
 
 export class App extends Component {
   componentDidMount() {
-    // TODO: Initialize culture-agnostic global settings here
+    // Initialize culture-agnostic global settings here
   }
 
   render() {
@@ -16,8 +16,8 @@ export class App extends Component {
       <Router>
         {/* Define cultures. */}
         <Switch>
-          <Route path="/admin/ar" render={(props) => <Routes basePath="/admin/ar" lang="ar" {...props} />} />
-          <Route path="/admin" render={(props) => <Routes basePath="/admin" lang="en" {...props} />} />
+          <Route path="/admin/ar" render={(props) => <Routes rootPath="/admin" basePath="/admin/ar" lang="ar" {...props} />} />
+          <Route path="/admin" render={(props) => <Routes rootPath="/admin" basePath="/admin" lang="en" {...props} />} />
         </Switch>
       </Router>
     );

@@ -10,6 +10,18 @@ import Utilities from './common/utiltiies';
 import Labels from './assets/strings/labels.json';
 import { setLabels } from './state/app-data/actions';
 
+export const routes = [
+  {
+    path: '/', exact: true, component: Main
+  },
+  {
+    path: '/inner-page', exact: true, component: InnerPage
+  },
+  {
+    errorCode: 404, component: NotFound
+  }
+];
+
 export class Routes extends Component {
   static propTypes = {
     // Router
@@ -42,11 +54,12 @@ export class Routes extends Component {
 
   render() {
     const {
-      match, basePath, lang, labels
+      match, rootPath, basePath, lang, labels
     } = this.props;
 
     const prefix = match.url.replace(/\/+$/, ''); // Trim trailing slashes
     const outerProps = {
+      rootPath,
       basePath,
       lang
     };
@@ -60,14 +73,19 @@ export class Routes extends Component {
         </Switch>
 
         <Switch>
-          {/* Homepage */}
-          <Route exact path={`${match.url}`} render={props => <Main {...props} {...outerProps} />} />
+          {/* Render container components */}
+          {routes.map(route => {
+            let path = (route.path || '').trim();
+            path = `${prefix}${path}`.replace(/\/\//g, '/');
 
-          {/* Inner Page */}
-          <Route path={`${prefix}/inner-page`} render={props => <InnerPage {...props} {...outerProps} />} />
+            const key = `key_${(route.path || path.errorCode)}`;
 
-          {/* 404 Page */}
-          <Route render={props => <NotFound {...props} {...outerProps} />} />
+            if (route.errorCode) {
+              return <Route key={key} render={props => <route.component {...props} {...outerProps} />} />;
+            }
+
+            return <Route key={key} exact={route.exact} path={path} render={props => <route.component {...props} {...outerProps} />} />;
+          })}
         </Switch>
       </div>
     );
