@@ -14,18 +14,20 @@ export class InnerPage extends Component {
   }
 
   render() {
+    const { basePath } = this.props;
+
     return (
       <section className="innerPage">
         <Helmet>
-          <title>Inner Page</title>
+          <title>Inner Admin Page</title>
           <meta name="description" content="Inner page description" />
         </Helmet>
 
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1>Inner page!</h1>
-              <div><Link to={`${this.props.basePath}/`}>Home</Link></div>
+              <h1>Inner Admin Page!</h1>
+              <div><Link to={`${basePath}/`}>Home</Link></div>
               <div><Link to="/inner-page">English</Link></div>
               <div><Link to="/ar/inner-page">Arabic</Link></div>
             </div>

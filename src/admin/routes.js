@@ -25,27 +25,35 @@ export class Routes extends Component {
   };
 
   componentDidMount() {
-    const labels = Utilities.getLabels(Labels, this.props.lang);
-    this.props.setLabels(labels);
+    const { lang, setLabels } = this.props;
+
+    const labels = Utilities.getLabels(Labels, lang);
+    setLabels(labels);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.lang !== nextProps.lang) {
+    const { lang, setLabels } = this.props;
+
+    if (lang !== nextProps.lang) {
       const labels = Utilities.getLabels(Labels, nextProps.lang);
-      this.props.setLabels(labels);
+      setLabels(labels);
     }
   }
 
   render() {
-    const prefix = this.props.match.url.replace(/\/+$/, ''); // Trim trailing slashes
+    const {
+      match, basePath, lang, labels
+    } = this.props;
+
+    const prefix = match.url.replace(/\/+$/, ''); // Trim trailing slashes
     const outerProps = {
-      basePath: this.props.basePath,
-      lang: this.props.lang
+      basePath,
+      lang
     };
 
     return (
       <div className="app-root">
-        <Helmet titleTemplate={`%s - ${this.props.labels.WebsiteName}`} />
+        <Helmet titleTemplate={`%s - ${labels.WebsiteName}`} />
         <Switch>
           <Route path="/ar" render={() => <Helmet htmlAttributes={{ lang: 'ar', dir: 'rtl' }} />} />
           <Route render={() => <Helmet htmlAttributes={{ lang: 'en', dir: 'ltr' }} />} />
@@ -53,7 +61,7 @@ export class Routes extends Component {
 
         <Switch>
           {/* Homepage */}
-          <Route exact path={`${this.props.match.url}`} render={props => <Main {...props} {...outerProps} />} />
+          <Route exact path={`${match.url}`} render={props => <Main {...props} {...outerProps} />} />
 
           {/* Inner Page */}
           <Route path={`${prefix}/inner-page`} render={props => <InnerPage {...props} {...outerProps} />} />

@@ -7,7 +7,7 @@ const cache = LRU({
     if (n && n.items && n.items.length > 0) {
       return n.items.length;
     }
-    else if (n && n.length > 0) {
+    if (n && n.length > 0) {
       return n.length;
     }
 

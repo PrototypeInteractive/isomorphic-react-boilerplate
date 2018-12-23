@@ -42,16 +42,28 @@ export class Main extends Component {
   }
 
   onButton2Click(e) {
+    const { setName } = this.props;
+
     e.preventDefault();
-    this.props.setName('New name');
+    setName('New name');
   }
 
   onButton3Click(e) {
+    const { setVersion } = this.props;
+
     e.preventDefault();
-    this.props.setVersion('1.2.3');
+    setVersion('1.2.3');
   }
 
   render() {
+    const {
+      userData, appData, basePath
+    } = this.props;
+
+    const {
+      title
+    } = this.state;
+
     return (
       <section className="main">
         <Helmet>
@@ -62,19 +74,19 @@ export class Main extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1>{this.state.title}</h1>
-              <h2>{this.props.userData.name}</h2>
-              <h2>{this.props.appData.version}</h2>
-              <h2>{this.props.appData.labels.LocalizedTitle}</h2>
+              <h1>{title}</h1>
+              <h2>{userData.name}</h2>
+              <h2>{appData.version}</h2>
+              <h2>{appData.labels.LocalizedTitle}</h2>
               <CheckIcon width={50} height={50} />
               <div><Button label="Change title (state)" onClick={this.onButtonClick} /></div>
               <div><Button label="Change name (redux)" onClick={this.onButton2Click} /></div>
               <div><Button label="Change version (redux)" onClick={this.onButton3Click} /></div>
               <br />
-              <div><Link to={`${this.props.basePath}/inner-page`}>Inner page</Link></div>
+              <div><Link to={`${basePath}/inner-page`}>Inner page</Link></div>
               <div><Link to="/">English</Link></div>
               <div><Link to="/ar">Arabic</Link></div>
-              <div><Link to={`${this.props.basePath}/asdf`}>404</Link></div>
+              <div><Link to={`${basePath}/asdf`}>404</Link></div>
               <br />
               <div>
                 <LogoIcon width={500} height={100} />

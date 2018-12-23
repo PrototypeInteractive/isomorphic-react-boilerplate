@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
-const Button = props => (
-  <a className="testButton btn btn-default" href={props.href} onClick={props.onClick}>
-    <span>{props.label}</span>
+const Button = ({ href, label, onClick }) => (
+  <a className="testButton btn btn-default" href={href} onClick={onClick}>
+    <span>{label}</span>
   </a>
 );
 

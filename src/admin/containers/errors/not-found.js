@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-const NotFound = (props) => (
+const NotFound = ({ basePath }) => (
   <section className="innerPage">
     <Helmet>
       <title>Not Found</title>
@@ -14,7 +14,7 @@ const NotFound = (props) => (
       <div className="row">
         <div className="col-xs-12">
           <h1>Not Found</h1>
-          <div><Link to={`${props.basePath}/`}>Home</Link></div>
+          <div><Link to={`${basePath}/`}>Home</Link></div>
         </div>
       </div>
     </div>
