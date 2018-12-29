@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'; // TODO: Use HashRouter if BrowserRouter is not supported (in static build)
 import { hot } from 'react-hot-loader/root';
+import { withRouter } from 'react-router';
 import Routes from './routes';
 
 export class App extends Component {
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch => ({ // eslint-disable-line no-unused-vars
 const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
 });
 
-const reduxApp = connect(mapStateToProps, mapDispatchToProps)(App);
+// Use withRouter() to prevent connect() from preventing router updates. See ReadMe.md issues for details.
+const reduxApp = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
 export default hot(reduxApp);

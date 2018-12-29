@@ -1,25 +1,78 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import postcssRTL from 'postcss-rtl';
+// import postcssRTL from 'postcss-rtl';
 import Visualizer from 'webpack-visualizer-plugin';
-import externals from './src/server/utilities/externals';
+import nodeExternals from 'webpack-node-externals';
+
+// Common .scss loaders
+
+const commonStylesheetLoaders = [
+  {
+    loader: 'postcss-loader',
+    options: {
+      // plugins: [
+      //   postcssRTL()
+      // ],
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: true
+    }
+  }
+];
+
+
+// Common configuation
 
 const baseConfig = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'react-svg-loader',
+            options: {
+              svgo: {
+                plugins: [
+                  {
+                    removeTitle: true
+                  }
+                ],
+                floatPrecision: 2
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
   },
   plugins: [],
   devtool: 'source-map',
   mode: 'production'
 };
+
+
+// Client and admin website configuration
 
 export const publicConfig = {
   ...baseConfig,
@@ -38,53 +91,18 @@ export const publicConfig = {
       ...baseConfig.module.rules,
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [
-              postcssRTL()
-            ],
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true
-          }
-        }]
-      },
-      {
-        test: /\.svg$/,
         use: [
-          'babel-loader',
           {
-            loader: 'react-svg-loader',
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
             options: {
-              svgo: {
-                plugins: [{
-                  removeTitle: true
-                }],
-                floatPrecision: 2
-              }
+              importLoaders: 1,
+              sourceMap: true
             }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
+          },
+          ...commonStylesheetLoaders
         ]
       }
     ]
@@ -95,7 +113,7 @@ export const publicConfig = {
       inject: true,
       chunks: ['client'],
       template: 'src/client/index.html',
-      filename: './index.html'
+      filename: './index.template.html'
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -104,7 +122,7 @@ export const publicConfig = {
       filename: './admin/index.html'
     }),
     new Visualizer({
-      filename: '../../prod-bundle-stats.html'
+      filename: '../../dist/bundle-report.html'
     })
   ],
   optimization: {
@@ -116,7 +134,8 @@ export const publicConfig = {
         keep_fnames: true
       }
     })],
-    noEmitOnErrors: true
+    noEmitOnErrors: true,
+    occurrenceOrder: true
   },
   devServer: {
     contentBase: './dist',
@@ -126,6 +145,9 @@ export const publicConfig = {
     jquery: 'jQuery'
   }
 };
+
+
+// Server configuration
 
 export const serverConfig = {
   ...baseConfig,
@@ -139,13 +161,24 @@ export const serverConfig = {
   module: {
     ...baseConfig.module,
     rules: [
-      ...baseConfig.module.rules
+      ...baseConfig.module.rules,
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              exportOnlyLocals: true
+            }
+          },
+          ...commonStylesheetLoaders
+        ]
+      }
     ]
   },
-  plugins: [
-    ...baseConfig.plugins
-  ],
-  externals
+  externals: [
+    nodeExternals()
+  ]
 };
 
 export default [

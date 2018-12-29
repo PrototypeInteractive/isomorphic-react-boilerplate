@@ -13,6 +13,18 @@ $mq-extend-flag: true !global;
 //*****************************************
 //  POSITIONING
 //*****************************************
+@mixin ltr {
+    [dir="ltr"] & {
+        @content;
+    }
+}
+
+@mixin rtl {
+    [dir="rtl"] & {
+        @content;
+    }
+}
+
 @mixin center-hor( $offset: 0) {
     @include left(50%);
     @include ltr {

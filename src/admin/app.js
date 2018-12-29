@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import Routes from './routes';
@@ -30,6 +31,7 @@ const mapDispatchToProps = dispatch => ({ // eslint-disable-line no-unused-vars
 const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
 });
 
-const reduxApp = connect(mapStateToProps, mapDispatchToProps)(App);
+// Use withRouter() to prevent connect() from preventing router updates. See ReadMe.md issues for details.
+const reduxApp = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
 export default hot(module)(reduxApp);

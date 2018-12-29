@@ -2,27 +2,80 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackShellPlugin from 'webpack-shell-plugin';
-import externals from './src/server/utilities/externals';
+import nodeExternals from 'webpack-node-externals';
+
+// Common .scss loaders
+
+const commonStylesheetLoaders = [
+  {
+    loader: 'postcss-loader',
+    options: {
+      // plugins: [
+      //   postcssRTL()
+      // ],
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: true
+    }
+  }
+];
+
+
+// Common configuation
 
 const baseConfig = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      options: {
-        cacheDirectory: true,
-        plugins: ['react-hot-loader/babel']
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          plugins: ['react-hot-loader/babel']
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'react-svg-loader',
+            options: {
+              svgo: {
+                plugins: [
+                  {
+                    removeTitle: true
+                  }
+                ],
+                floatPrecision: 2
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
       }
-    }]
+    ]
   },
   plugins: [],
   devtool: 'source-map',
   mode: 'development'
 };
+
+
+// Client and admin website configuration
 
 export const publicConfig = {
   ...baseConfig,
@@ -42,7 +95,10 @@ export const publicConfig = {
     publicPath: '/'
   },
   resolve: {
-    extensions: [...baseConfig.resolve.extensions, '.scss']
+    extensions: [
+      ...baseConfig.resolve.extensions,
+      '.scss'
+    ] // TODO: see if this is still required
   },
   module: {
     ...baseConfig.module,
@@ -50,48 +106,18 @@ export const publicConfig = {
       ...baseConfig.module.rules,
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true
-          }
-        }]
-      },
-      {
-        test: /\.svg$/,
         use: [
-          'babel-loader',
           {
-            loader: 'react-svg-loader',
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
             options: {
-              svgo: {
-                plugins: [{
-                  removeTitle: true
-                }],
-                floatPrecision: 2
-              }
+              importLoaders: 1,
+              sourceMap: true
             }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
+          },
+          ...commonStylesheetLoaders
         ]
       }
     ]
@@ -102,7 +128,7 @@ export const publicConfig = {
       inject: true,
       chunks: ['client'],
       template: 'src/client/index.html',
-      filename: './index.html'
+      filename: './index.template.html'
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -113,7 +139,6 @@ export const publicConfig = {
     new webpack.DefinePlugin({
       'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
@@ -124,6 +149,9 @@ export const publicConfig = {
     jquery: 'jQuery'
   }
 };
+
+
+// Server configuration
 
 export const serverConfig = env => {
   const plugins = [
@@ -149,11 +177,25 @@ export const serverConfig = env => {
     module: {
       ...baseConfig.module,
       rules: [
-        ...baseConfig.module.rules
+        ...baseConfig.module.rules,
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                exportOnlyLocals: true
+              }
+            },
+            ...commonStylesheetLoaders
+          ]
+        }
       ]
     },
     plugins,
-    externals
+    externals: [
+      nodeExternals()
+    ]
   };
 };
 

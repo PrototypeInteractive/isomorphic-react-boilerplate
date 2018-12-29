@@ -7,9 +7,12 @@ import App from './app';
 import configurStore from './state/configureStore';
 import './assets/sass/style.scss';
 
-const store = configurStore();
+const preloadedState = window.__PRELOADED_STATE__; // eslint-disable-line no-underscore-dangle
+delete window.__PRELOADED_STATE__; // eslint-disable-line no-underscore-dangle
 
-ReactDOM.render(
+const store = configurStore(preloadedState);
+
+ReactDOM.hydrate(
   <Provider store={store}>
     <Router>
       <App />

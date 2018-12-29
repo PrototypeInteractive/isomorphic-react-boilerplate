@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
       winston.format.splat(),
       winston.format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
     ),
-    level: process.env.LOG_LEVEL || 'error'
+    level: process.env.LOG_LEVEL || 'debug'
   }));
 }
 else {

@@ -11,8 +11,12 @@ if (process.env.CLIENT_ENV === 'development') {
   middleware.push(logger);
 }
 
-export default function configureStore() {
-  const store = compose(applyMiddleware(...middleware))(createStore)(reducers);
+export default function configureStore(preloadedState) {
+  const store = createStore(
+    reducers,
+    preloadedState,
+    compose(applyMiddleware(...middleware))
+  );
 
   return store;
 }

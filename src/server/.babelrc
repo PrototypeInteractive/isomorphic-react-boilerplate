@@ -5,7 +5,8 @@
             "targets": {
                 "node": "current"
             }
-        }]
+        }],
+        "@babel/preset-react"
     ],
     "plugins": [
         "@babel/plugin-transform-async-to-generator",

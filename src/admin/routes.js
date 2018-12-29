@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Main from './containers/main';
@@ -100,4 +101,5 @@ const mapStateToProps = state => ({
   labels: state.appData.labels
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+// Use withRouter() to prevent connect() from preventing router updates. See ReadMe.md issues for details.
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
