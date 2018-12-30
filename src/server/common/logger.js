@@ -28,7 +28,7 @@ else {
       winston.format.printf(info => `${info.timestamp} - ${info.level}: ${info.message}`)
     ),
     filename: `./logs/${timestamp}_log.log`,
-    level: process.env.LOG_LEVEL || 'error',
+    level: process.env.LOG_LEVEL || 'info',
     maxsize: 1024 * 1024 * 10 // 10 MB rolling log files
   }));
 }

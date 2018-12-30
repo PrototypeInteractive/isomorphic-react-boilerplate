@@ -90,7 +90,6 @@ Make sure the correct environment variables are set up
 - Helmet
 
 # TODO
-- Move dependencies in package.json from dev to support server-side rendering in production environment
 - Unit testing framework (Jest)
 - API integration testing framework (Jest)
 - UI integration testing frameowkr (Selenium/TestCafe)
