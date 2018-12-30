@@ -88,7 +88,3 @@ Make sure the correct environment variables are set up
 - Redux
 - Router
 - Helmet
-
-
-# Pending
-- mixins vs postcss-rtl (issue with postcss rtl:ignore rule not functioning as expected sometimes)
