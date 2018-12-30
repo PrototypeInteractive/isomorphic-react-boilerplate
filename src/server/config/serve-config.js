@@ -9,16 +9,36 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
+import onHeaders from 'on-headers';
+import uuid from 'uuid/v4';
 import logger from '../common/logger';
 import { publicConfig } from '../../../webpack.dev.config.babel';
 import apiv1 from '../api/v1';
 import redirects from '../redirects';
-import { App } from '../../client/app';
 import configureStore from '../../client/state/configureStore';
+import Utilities from '../common/utilities';
 
 const serveConfig = app => {
   // Setup redirects
   redirects(app);
+
+  // Log the request-response duration for benchmarking purposes
+  if (process.env.LOG_LEVEL === 'debug') {
+    app.use((req, res, next) => {
+      if (req.originalUrl.indexOf('/__webpack_hmr') >= 0) {
+        return;
+      }
+
+      const requestId = `[${uuid()} - ${req.method.toUpperCase()}] ${req.originalUrl}`;
+      const timer = Utilities.startTimer(requestId);
+
+      onHeaders(res, () => {
+        Utilities.stopTimer(timer);
+      });
+
+      next();
+    });
+  }
 
   // Setup REST API
   apiv1(app);
@@ -75,8 +95,15 @@ const serveConfig = app => {
   });
 
   // Serve client website with server-side rendering
-  app.get('/*', (req, res) => {
+  app.get('/*', async (req, res) => {
     logger.debug('serve client: %j', req.originalUrl);
+
+    // Dynamically import App react component instead of statically importing the client app in the server code
+    // to instruct webpack to craete a separate client bundle for server-side-rendering. This will prevent nodemon (during development)
+    // from restarting the server when a client component is updated due to hot module reload. In production environment,
+    // this dynamic import is cached so that any subsequent imports will not require a file-system operation.
+
+    const { default: App } = await import(/* webpackChunkName: "client" */ '../../client/app');
 
     const store = configureStore();
     const context = {};
@@ -107,7 +134,8 @@ const serveConfig = app => {
     fs.readFile(indexFilePath, 'utf8', (err, data) => {
       if (err) {
         logger.error('Failed to load index template file', err);
-        return res.status(500).send('Internal server error. Template failed to load.');
+        res.status(500).send('Internal server error. Template failed to load.');
+        return;
       }
 
       const result = data
@@ -119,7 +147,7 @@ const serveConfig = app => {
               window.__PRELOADED_STATE__ = ${JSON.stringify(storeState).replace(/</g, '\\u003c')}
             </script>
           `);
-      return res.send(result);
+      res.send(result);
     });
   });
 };

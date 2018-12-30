@@ -151,7 +151,7 @@ export const serverConfig = env => {
 
   if (env && env.dev) {
     plugins.push(new WebpackShellPlugin({
-      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon ./dist/server/index.js'],
+      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --ignore client.bundle.js ./dist/server/index.js'],
       dev: true
     }));
   }
@@ -162,6 +162,7 @@ export const serverConfig = env => {
     target: 'node',
     output: {
       filename: 'index.js',
+      chunkFilename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist/server'),
       publicPath: '/'
     },

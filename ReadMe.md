@@ -90,7 +90,6 @@ Make sure the correct environment variables are set up
 - Helmet
 
 # TODO
-- Remove nodemon dependency during dev because it doesn't work great with hot-module-reloading and server-side-rendering (see watcher usage in [here](https://github.com/glenjamin/ultimate-hot-reloading-example/blob/master/server.js))
 - Unit testing framework (Jest)
 - API integration testing framework (Jest)
 - UI integration testing frameowkr (Selenium/TestCafe)
