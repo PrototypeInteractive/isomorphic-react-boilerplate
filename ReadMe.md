@@ -15,7 +15,7 @@ Isomorphic Node.js + Express + ReactJS boilerplate.
 - Redux for global state management
 - Built-in react-router configuration for single-page-application (SPA) navigation
 - URL and text localization
-- RTL support through mixins for Arabic locale
+- RTL stylesheet support without the need for mixins
 - Server-side rendering (isomorphic JavaScript) of client website.
 
 ## Quick Start
@@ -75,6 +75,7 @@ Make sure the correct environment variables are set up
 - Node.js
 - Express
 - SASS (SCSS)
+- PostCSS
 - Bootstrap
 - React
 - React-Router

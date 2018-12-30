@@ -9,6 +9,7 @@ import LogoIcon from '../../assets/images/logo.svg';
 import CheckIcon from '../../assets/icons/check.svg';
 import { setVersion } from '../../state/app-data/actions';
 import { setName } from '../../state/user-data/actions';
+import './style.scss';
 
 export class Main extends Component {
   static propTypes = {
@@ -88,6 +89,8 @@ export class Main extends Component {
               <div><Link to={`${rootPath}/`}>English</Link></div>
               <div><Link to={`${rootPath}/ar`}>Arabic</Link></div>
               <div><Link to={`${basePath}/asdf`}>404</Link></div>
+              <div className="divMargin-localized">Div with margin - localized</div>
+              <div className="divMargin-invariant">Div with margin - invariant</div>
               <br />
               <div>
                 <LogoIcon width={500} height={100} />

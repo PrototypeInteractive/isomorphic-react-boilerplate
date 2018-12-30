@@ -62,15 +62,12 @@ const serveConfig = app => {
         if (serveStatic.mime.lookup(path) === 'text/html') {
           res.setHeader('Cache-Control', 'public, max-age=0');
         }
-        console.log('serve static: ', path);
       }
     }));
   }
 
   // Serve client website with server-side rendering
   app.get('/*', (req, res) => {
-    console.log('serve prerendered: ', req.originalUrl);
-
     const store = configureStore();
     const context = {};
 

@@ -1,7 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-// import postcssRTL from 'postcss-rtl';
 import Visualizer from 'webpack-visualizer-plugin';
 import nodeExternals from 'webpack-node-externals';
 
@@ -11,9 +10,6 @@ const commonStylesheetLoaders = [
   {
     loader: 'postcss-loader',
     options: {
-      // plugins: [
-      //   postcssRTL()
-      // ],
       sourceMap: true
     }
   },

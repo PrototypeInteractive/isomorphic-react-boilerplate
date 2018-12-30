@@ -10,9 +10,6 @@ const commonStylesheetLoaders = [
   {
     loader: 'postcss-loader',
     options: {
-      // plugins: [
-      //   postcssRTL()
-      // ],
       sourceMap: true
     }
   },
@@ -93,12 +90,6 @@ export const publicConfig = {
     filename: 'main.[name].js',
     path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
-  },
-  resolve: {
-    extensions: [
-      ...baseConfig.resolve.extensions,
-      '.scss'
-    ] // TODO: see if this is still required
   },
   module: {
     ...baseConfig.module,

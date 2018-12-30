@@ -1,0 +1,11 @@
+@import '../../assets/sass/references';
+
+.divMargin {
+    &-localized {
+        margin-left: 100px;
+    }
+
+    &-invariant {
+        margin-left: 100px #{"/* rtl:ignore */"};
+    }
+}
