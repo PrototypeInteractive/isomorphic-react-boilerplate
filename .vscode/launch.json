@@ -9,13 +9,17 @@
             "request": "launch",
             "name": "Nodemon",
             "runtimeExecutable": "nodemon",
+            "args": [
+                "--ignore client.bundle.js"
+            ],
             "program": "${workspaceFolder}/dist/server/index.js",
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "env": {
                 "NODE_ENV": "development",
-                "DEBUG": "api"
+                "LOG_LEVEL": "debug",
+                "DEBUG": "api",
             }
         },
         {
