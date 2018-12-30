@@ -27,7 +27,7 @@ export class InnerPage extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1>Inner Client Page!</h1>
+              <h1>Inner Client Page!!!</h1>
               <div><Link to={`${basePath}/`}>Home</Link></div>
               <div><Link to={`${rootPath}/inner-page`}>English</Link></div>
               <div><Link to={`${rootPath}/ar/inner-page`}>Arabic</Link></div>

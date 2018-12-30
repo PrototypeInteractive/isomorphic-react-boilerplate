@@ -52,22 +52,32 @@ const serveConfig = app => {
     app.use(webpackHotMiddleware(compiler));
     logger.info('Running webpack dev and hot middleware!');
   }
-  else {
-    // Serve admin website and static files if it exists
-    app.use(serveStatic('dist/public', {
-      index: ['index.html'],
-      dotfiles: 'ignore',
-      maxAge: process.env.NODE_ENV === 'production' ? '7d' : '0d',
-      setHeaders: (res, path) => {
-        if (serveStatic.mime.lookup(path) === 'text/html') {
-          res.setHeader('Cache-Control', 'public, max-age=0');
-        }
+
+  // Serve admin website and static files if it exists
+  app.use(serveStatic('dist/public', {
+    index: ['index.html'],
+    dotfiles: 'ignore',
+    maxAge: process.env.NODE_ENV === 'production' ? '7d' : '0d',
+    setHeaders: (res, path) => {
+      logger.debug('serve static: %j', path);
+
+      if (serveStatic.mime.lookup(path) === 'text/html') {
+        res.setHeader('Cache-Control', 'public, max-age=0');
       }
-    }));
-  }
+    }
+  }));
+
+  app.get('/admin*', (req, res) => {
+    logger.debug('serve admin: %j', req.originalUrl);
+
+    const filePath = path.join('.', 'dist', 'public', 'admin', 'index.html');
+    res.sendFile(path.resolve(filePath));
+  });
 
   // Serve client website with server-side rendering
   app.get('/*', (req, res) => {
+    logger.debug('serve client: %j', req.originalUrl);
+
     const store = configureStore();
     const context = {};
 
