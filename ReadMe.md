@@ -93,3 +93,4 @@ Make sure the correct environment variables are set up
 - Unit testing framework (Jest)
 - API integration testing framework (Jest)
 - UI integration testing frameowkr (Selenium/TestCafe)
+- Watch for client changes and automatically clear client app module cache so server will render latest client code. Current issue is that after HMR, server-render is outdated compared to client code.

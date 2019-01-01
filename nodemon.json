@@ -4,6 +4,6 @@
         "js": "node --harmony"
     },
     "watch": [
-        "dist/server"
+        "dist/server/index.js"
     ]
 }

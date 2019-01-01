@@ -31,4 +31,8 @@ const mapStateToProps = state => ({ // eslint-disable-line no-unused-vars
 // Use withRouter() to prevent connect() from preventing router updates. See ReadMe.md issues for details.
 const reduxApp = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
-export default hot(reduxApp);
+const HotApp = hot(reduxApp);
+
+HotApp.TestString = 'Test!!!!';
+
+export default HotApp;

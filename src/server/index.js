@@ -24,7 +24,7 @@ headersConfig(app);
 parsersConfig(app);
 serveConfig(app);
 
-logger.info('---------------------------');
+logger.info('----------------------------');
 logger.info('☕️ ');
 logger.info('Starting Server');
 logger.info(`Environment: ${process.env.NODE_ENV}`);

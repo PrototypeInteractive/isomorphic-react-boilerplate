@@ -151,7 +151,7 @@ export const serverConfig = env => {
 
   if (env && env.dev) {
     plugins.push(new WebpackShellPlugin({
-      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --ignore client.bundle.js ./dist/server/index.js'],
+      onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon ./server.js'],
       dev: true
     }));
   }

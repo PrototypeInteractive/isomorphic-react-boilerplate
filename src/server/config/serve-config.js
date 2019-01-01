@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import serveStatic from 'serve-static';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import chokidar from 'chokidar';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -25,10 +26,6 @@ const serveConfig = app => {
   // Log the request-response duration for benchmarking purposes
   if (process.env.LOG_LEVEL === 'debug') {
     app.use((req, res, next) => {
-      if (req.originalUrl.indexOf('/__webpack_hmr') >= 0) {
-        return;
-      }
-
       const requestId = `[${uuid()} - ${req.method.toUpperCase()}] ${req.originalUrl}`;
       const timer = Utilities.startTimer(requestId);
 
@@ -71,6 +68,22 @@ const serveConfig = app => {
 
     app.use(webpackHotMiddleware(compiler));
     logger.info('Running webpack dev and hot middleware!');
+
+    // Remove client module from require cache if it changes so it will be loaded again.
+    const watcher = chokidar.watch('./dist/server/client.bundle.js');
+    watcher.on('ready', () => {
+      watcher.on('all', () => {
+        logger.debug('client.bundle.js changed.');
+        console.log('Object.keys(require.cache)', Object.keys(require.cache));
+
+        Object.keys(require.cache).forEach(moduleId => {
+          if (moduleId.indexOf('./src/client/') >= 0) {
+            logger.debug(`Clearing ${moduleId} from cache.`);
+            delete require.cache[moduleId];
+          }
+        });
+      });
+    });
   }
 
   // Serve admin website and static files if it exists
@@ -102,8 +115,9 @@ const serveConfig = app => {
     // to instruct webpack to craete a separate client bundle for server-side-rendering. This will prevent nodemon (during development)
     // from restarting the server when a client component is updated due to hot module reload. In production environment,
     // this dynamic import is cached so that any subsequent imports will not require a file-system operation.
-
     const { default: App } = await import(/* webpackChunkName: "client" */ '../../client/app');
+
+    logger.debug(`App.TestString = ${App.TestString}`);
 
     const store = configureStore();
     const context = {};
