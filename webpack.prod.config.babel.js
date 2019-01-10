@@ -1,8 +1,10 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import Visualizer from 'webpack-visualizer-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
+
+process.traceDeprecation = true;
 
 // Common .scss loaders
 
@@ -33,7 +35,7 @@ const baseConfig = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        loader: 'babel-loader'
       },
       {
         test: /\.svg$/,
@@ -56,9 +58,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        loader: 'file-loader'
       }
     ]
   },
@@ -117,8 +117,9 @@ export const publicConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
-    new Visualizer({
-      filename: '../../dist/bundle-report.html'
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
     })
   ],
   optimization: {
@@ -131,7 +132,10 @@ export const publicConfig = {
       }
     })],
     noEmitOnErrors: true,
-    occurrenceOrder: true
+    occurrenceOrder: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   devServer: {
     contentBase: './dist',

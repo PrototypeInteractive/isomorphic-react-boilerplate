@@ -60,9 +60,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        loader: 'file-loader'
       }
     ]
   },
