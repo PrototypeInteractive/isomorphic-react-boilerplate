@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 process.traceDeprecation = true;
 
@@ -77,7 +78,7 @@ export const publicConfig = {
     admin: ['./src/admin/index.js']
   },
   output: {
-    filename: 'main.[name].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
@@ -89,7 +90,7 @@ export const publicConfig = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
@@ -120,6 +121,10 @@ export const publicConfig = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   optimization: {

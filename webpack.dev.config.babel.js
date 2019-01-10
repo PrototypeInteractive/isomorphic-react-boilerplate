@@ -85,7 +85,7 @@ export const publicConfig = {
     ]
   },
   output: {
-    filename: 'main.[name].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
