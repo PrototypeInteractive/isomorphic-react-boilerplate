@@ -18,6 +18,8 @@ Isomorphic Node.js + Express + ReactJS boilerplate.
 - RTL stylesheet support without the need for mixins
 - Server-side rendering (isomorphic JavaScript) of client website.
 - Critical CSS for faster Time-to-Interactive (TTI) with deferred full CSS for client website.
+- Unit testing using Jest.
+- Integration testing using Jest.
 
 ## Quick Start
 
@@ -26,33 +28,58 @@ Install Prerequisites
 - Install Nodemon by executing `npm install nodemon -g`
 
 Execute the following in the terminal/command line:
-```
+```shell
 npm install
 npm run dev
 ```
 
-## How to start development server
-`npm run dev`
+## Scripts
+
+### How to start development server
+```shell
+npm run dev
+```
 
 This will clean the dist folder, run webpack, and start a web server at http://localhost:8080/. This will support Hot Replacement Module (HMR) for the react client application. This also automatically restarts the web server if any changes are made in the server source code.
 
-## How to build files for production (with server)
-`npm run prod`
+### How to build files for production (with server)
+```shell
+npm run prod
+```
 
 This will clean the dist folder and create an optimized react and server builds inside /dist folder. The server files will be inside /dist/server.
 Also a `prod-bundle-stats.html` file will be created in the project root, this file shows an analysis for what included in the bundle
 
-## Visual Studio Code Debugging
+### Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
 
 1. Execute the following inside terminal:
-`npm run debug`
+```shell
+npm run debug
+```
 1. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
 1. Press **F5** on the keyboard to start the debugging session
 
 This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/client files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
 
 Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
+
+### Unit Tests
+```shell
+npm run test
+```
+Runs all tests with the file extension `.test.js`.
+
+### Integration Tests
+```shell
+npm run test:integration
+```
+Runs all integration tests with the file extension `.test.integration.js`. By default, the API tests are executed from `http://localhost:8080`. To change this, set the `BASE_URL` environment variable before running the script.
+
+Example:
+```shell
+BASE_URL=http://example.com npm run test:integration
+```
 
 ## Deployment
 
@@ -90,8 +117,7 @@ Make sure the correct environment variables are set up
 - Router
 - Helmet
 - Winston
+- Jest
 
 # TODO
-- Unit testing framework (Jest)
-- API integration testing framework (Jest)
-- UI integration testing frameowkr (Selenium/TestCafe)
+- UI testing framework (Selenium/TestCafe)

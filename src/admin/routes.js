@@ -34,7 +34,8 @@ export class Routes extends Component {
 
     // Component
     lang: PropTypes.string.isRequired,
-    basePath: PropTypes.string.isRequired
+    basePath: PropTypes.string.isRequired,
+    rootPath: PropTypes.string.isRequired
   };
 
   componentDidMount() {

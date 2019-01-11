@@ -1,8 +1,8 @@
 import uuid from 'uuid/v4';
-import Utilities from '../../src/server/common/utilities';
-import logger from '../../src/server/common/logger';
+import Utilities from './utilities';
+import logger from './logger';
 
-jest.mock('../../src/server/common/logger');
+jest.mock('./logger');
 
 beforeAll(async () => {
   jest.setTimeout(30 * 1000); // 30-second timeout
