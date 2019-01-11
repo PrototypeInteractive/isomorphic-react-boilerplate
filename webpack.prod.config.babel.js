@@ -1,8 +1,12 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import Visualizer from 'webpack-visualizer-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+process.traceDeprecation = true;
 
 // Common .scss loaders
 
@@ -33,7 +37,7 @@ const baseConfig = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        loader: 'babel-loader'
       },
       {
         test: /\.svg$/,
@@ -56,9 +60,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        loader: 'file-loader'
       }
     ]
   },
@@ -77,7 +79,7 @@ export const publicConfig = {
     admin: ['./src/admin/index.js']
   },
   output: {
-    filename: 'main.[name].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
@@ -89,7 +91,7 @@ export const publicConfig = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
@@ -117,8 +119,14 @@ export const publicConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
-    new Visualizer({
-      filename: '../../dist/bundle-report.html'
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
+    }),
+    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg'),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   optimization: {
@@ -131,7 +139,10 @@ export const publicConfig = {
       }
     })],
     noEmitOnErrors: true,
-    occurrenceOrder: true
+    occurrenceOrder: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   devServer: {
     contentBase: './dist',

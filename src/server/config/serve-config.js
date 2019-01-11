@@ -26,6 +26,7 @@ const serveConfig = app => {
   if (process.env.LOG_LEVEL === 'debug') {
     app.use((req, res, next) => {
       if (req.originalUrl.indexOf('/__webpack_hmr') >= 0) {
+        next();
         return;
       }
 

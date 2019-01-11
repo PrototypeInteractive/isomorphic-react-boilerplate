@@ -1,4 +1,5 @@
 import helmet from 'helmet';
+import compression from 'compression';
 
 const headersConfig = app => {
   // Add header precautions for security
@@ -24,6 +25,8 @@ const headersConfig = app => {
 
     next();
   });
+
+  app.use(compression());
 };
 
 export default headersConfig;

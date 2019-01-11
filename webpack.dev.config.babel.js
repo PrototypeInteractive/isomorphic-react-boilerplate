@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackShellPlugin from 'webpack-shell-plugin';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 
 // Common .scss loaders
@@ -60,9 +61,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        loader: 'file-loader'
       }
     ]
   },
@@ -87,7 +86,7 @@ export const publicConfig = {
     ]
   },
   output: {
-    filename: 'main.[name].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist/public'),
     publicPath: '/'
   },
@@ -127,11 +126,17 @@ export const publicConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
+    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg'),
     new webpack.DefinePlugin({
       'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   devServer: {
     contentBase: './dist',
     hot: true
