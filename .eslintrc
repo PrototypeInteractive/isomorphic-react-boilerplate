@@ -2,6 +2,9 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "root": true,
+    "env": {
+        "jest": true
+    },
     "plugins": [
         "import"
     ],
