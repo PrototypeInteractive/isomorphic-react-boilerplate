@@ -17,6 +17,7 @@ Isomorphic Node.js + Express + ReactJS boilerplate.
 - URL and text localization
 - RTL stylesheet support without the need for mixins
 - Server-side rendering (isomorphic JavaScript) of client website.
+- Critical CSS for faster Time-to-Interactive (TTI) with deferred full CSS for client website.
 
 ## Quick Start
 
@@ -88,6 +89,7 @@ Make sure the correct environment variables are set up
 - Redux
 - Router
 - Helmet
+- Winston
 
 # TODO
 - Unit testing framework (Jest)

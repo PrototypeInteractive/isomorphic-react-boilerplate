@@ -106,8 +106,13 @@ const serveConfig = app => {
 
     const { default: App } = await import(/* webpackChunkName: "client" */ '../../client/app');
 
+    const cssList = [];
     const store = configureStore();
-    const context = {};
+    const context = {
+      addStyle: css => {
+        cssList.push(css);
+      }
+    };
 
     const app = ReactDOMServer.renderToString(
       <Provider store={store}>
@@ -116,6 +121,8 @@ const serveConfig = app => {
         </StaticRouter>
       </Provider>
     );
+
+    const cssString = Utilities.serializeCriticalCss(cssList);
 
     // Send redirect response if required
     if (context.url) {
@@ -139,11 +146,18 @@ const serveConfig = app => {
         return;
       }
 
+      const isCriticalCSSEnabled = process.env.NODE_ENV === 'production' && process.env.DISABLE_CRITICAL_CSS !== 'true' && !!cssString;
+
       const result = data
+        .replace('{{Styles}}', isCriticalCSSEnabled ? `
+            <style id="InlineCSS" type="text/css">${cssString}</style>
+            <link rel="preload" href="/client.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+            <noscript><link rel="stylesheet" href="/client.css"></noscript>
+          ` : '')
         .replace('<div id="app"></div>', `
             <div id="app">${app}</div>
           `)
-        .replace('<div id="scripts-placeholder"></div>', `
+        .replace('{{Scripts}}', `
             <script>
               window.__PRELOADED_STATE__ = ${JSON.stringify(storeState).replace(/</g, '\\u003c')}
             </script>

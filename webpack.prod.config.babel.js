@@ -5,6 +5,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackExcludeAssetsPlugin from 'html-webpack-exclude-assets-plugin';
 
 process.traceDeprecation = true;
 
@@ -111,7 +112,8 @@ export const publicConfig = {
       inject: true,
       chunks: ['client'],
       template: 'src/client/index.html',
-      filename: './index.template.html'
+      filename: './index.template.html',
+      excludeAssets: [/client.css/]
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -119,15 +121,16 @@ export const publicConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
+    new HtmlWebpackExcludeAssetsPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false
     }),
-    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg'),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
-    })
+    }),
+    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg')
   ],
   optimization: {
     minimizer: [new TerserPlugin({
@@ -172,12 +175,8 @@ export const serverConfig = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'css-loader',
-            options: {
-              exportOnlyLocals: true
-            }
-          },
+          'to-string-loader',
+          'css-loader',
           ...commonStylesheetLoaders
         ]
       }

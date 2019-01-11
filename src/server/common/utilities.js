@@ -22,6 +22,12 @@ const Utilities = {
     }
 
     return duration;
+  },
+  serializeCriticalCss: styles => {
+    const uniqueStyles = [...new Set(styles)].filter(x => x !== '[object Object]');
+    const result = uniqueStyles.join('');
+
+    return result;
   }
 };
 

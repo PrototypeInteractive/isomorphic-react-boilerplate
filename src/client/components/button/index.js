@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.scss';
+import Styled from '../styled';
+import style from './style.scss';
 
 const Button = ({ href, label, onClick }) => (
-  <a className="testButton btn btn-default" href={href} onClick={onClick}>
-    <span>{label}</span>
-  </a>
+  <Styled style={style}>
+    <a className="testButton btn btn-default" href={href} onClick={onClick}>
+      <span>{label}</span>
+    </a>
+  </Styled>
 );
 
 Button.propTypes = {
@@ -16,7 +19,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   href: 'javascript: void(0);',
-  onClick: () => {}
+  onClick: () => { }
 };
 
 export default Button;
