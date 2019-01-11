@@ -1,6 +1,6 @@
 import LRU from 'lru-cache';
 
-const cache = LRU({
+const cache = new LRU({
   max: 50,
   length(n) {
     if (n && n.items && n.items.length > 0) {
