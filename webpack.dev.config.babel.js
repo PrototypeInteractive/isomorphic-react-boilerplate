@@ -130,6 +130,11 @@ export const publicConfig = {
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   devServer: {
     contentBase: './dist',
     hot: true
