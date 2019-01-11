@@ -1,4 +1,3 @@
-// import debug from 'debug';
 import LRU from 'lru-cache';
 
 const cache = LRU({
