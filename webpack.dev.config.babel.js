@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackShellPlugin from 'webpack-shell-plugin';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 
 // Common .scss loaders
@@ -125,6 +126,7 @@ export const publicConfig = {
       template: 'src/admin/index.html',
       filename: './admin/index.html'
     }),
+    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg'),
     new webpack.DefinePlugin({
       'process.env.CLIENT_ENV': JSON.stringify(process.env.NODE_ENV)
     }),

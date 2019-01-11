@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 process.traceDeprecation = true;
@@ -122,6 +123,7 @@ export const publicConfig = {
       analyzerMode: 'static',
       openAnalyzer: false
     }),
+    new FaviconsWebpackPlugin('./src/common/assets/icons/favicon.svg'),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
