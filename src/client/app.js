@@ -6,6 +6,8 @@ import { Switch, Route } from 'react-router-dom'; // TODO: Use HashRouter if Bro
 import { hot } from 'react-hot-loader/root';
 import { withRouter } from 'react-router';
 import Routes from './routes';
+import Styled from './components/styled';
+import style from './assets/sass/style.scss';
 
 export class App extends Component {
   componentDidMount() {
@@ -14,10 +16,12 @@ export class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route path="/ar" render={(props) => <Routes rootPath="" basePath="/ar" lang="ar" {...props} />} />
-        <Route path="/" render={(props) => <Routes rootPath="" basePath="" lang="en" {...props} />} />
-      </Switch>
+      <Styled style={style}>
+        <Switch>
+          <Route path="/ar" render={(props) => <Routes rootPath="" basePath="/ar" lang="ar" {...props} />} />
+          <Route path="/" render={(props) => <Routes rootPath="" basePath="" lang="en" {...props} />} />
+        </Switch>
+      </Styled>
     );
   }
 }
