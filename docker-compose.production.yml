@@ -17,9 +17,11 @@ services:
     image: isomorphic-react-boilerplate
     build:
       context: .
-      dockerfile: ./.docker/node.production.Dockerfile
+      dockerfile: ./.docker/node.production.dockerfile
     environment:
       NODE_ENV: production
+    volumes:
+      - ./logs:/usr/src/app/logs
     ports:
       - 3000:3000
     networks:

@@ -118,6 +118,7 @@ Make sure the correct environment variables are set up
 - Helmet
 - Winston
 - Jest
+- Docker
 
 # TODO
 - UI testing framework (Selenium/TestCafe)

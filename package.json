@@ -2,16 +2,18 @@
   "name": "react-minimal-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server/index.js",
+  "main": "server.js",
   "engines": {
     "node": ">=8.14.0"
   },
   "scripts": {
-    "start": "node ./dist/server/index.js",
+    "start": "node server.js",
     "debug": "shx --silent rm -rf dist && webpack --watch --config webpack.dev.config.babel.js --env.debug",
     "dev": "shx --silent rm -rf dist && cross-env LOG_LEVEL=debug webpack --watch --config webpack.dev.config.babel.js --env.dev",
     "prod": "shx --silent rm -rf dist && cross-env NODE_ENV=production webpack --config webpack.prod.config.babel.js",
     "server": "npm run prod && cross-env NODE_ENV=production node server.js",
+    "docker:prod": "docker-compose -f docker-compose.production.yml up --build",
+    "docker:down": "docker-compose down -v",
     "test": "jest .*\\.test\\.js",
     "test:integration": "jest .*\\.test\\.integration\\.js",
     "lint": "node_modules/.bin/eslint ./src --fix"

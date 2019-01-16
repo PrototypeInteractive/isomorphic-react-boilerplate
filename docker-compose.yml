@@ -1,11 +1,11 @@
 version: '2.1'
 
 services:
-  isomorphic-react-boilerplate:
+  node:
     image: isomorphic-react-boilerplate
     build:
       context: .
-      dockerfile: ./.docker/dev.Dockerfile
+      dockerfile: ./.docker/node.development.dockerfile
     environment:
       NODE_ENV: development
     ports:
