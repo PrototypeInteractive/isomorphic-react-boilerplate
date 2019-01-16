@@ -8,5 +8,8 @@ services:
       dockerfile: ./.docker/node.development.dockerfile
     environment:
       NODE_ENV: development
+    volumes:
+      - ./logs:/usr/src/app/logs
+      - ./src:/usr/src/app/src
     ports:
       - 3000:3000

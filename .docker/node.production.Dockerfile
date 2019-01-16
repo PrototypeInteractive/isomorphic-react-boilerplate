@@ -15,5 +15,4 @@ COPY dist/ ./dist/
 
 EXPOSE 3000
 
-# CMD npm start
 ENTRYPOINT ["pm2", "start", "server.js","--name","node","--log","/var/log/pm2/pm2.log","--no-daemon"]

@@ -1,15 +1,17 @@
-FROM node:10.13-alpine
+FROM node:10.13
 
 ENV NODE_ENV development
 
 WORKDIR /usr/src/app
 
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+COPY ["server.js", "package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 
-RUN npm install --silent && mv node_modules ../
+RUN npm install nodemon -g
+
+RUN npm install --silent
 
 COPY . .
 
 EXPOSE 3000
 
-CMD npm start
+CMD npm run dev
