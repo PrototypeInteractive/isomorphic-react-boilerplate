@@ -1,9 +1,7 @@
-# Minimal React JS Boilerplate
-
-## Description
+# Isomorphic React Boilerplate
 Isomorphic Node.js + Express + ReactJS boilerplate.
 
-### Features
+## Features
 - Uses Node.js Express for serving the web application.
 - Uses webpack for packing and transpiling all assets (js, sass, images, etc.).
 - Uses `@babel/preset-env` syntax for client, server, and webpack configuration.
