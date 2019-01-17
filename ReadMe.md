@@ -76,16 +76,31 @@ For production deployment, the image will need to be pushed to Docker Hub or a p
 ### Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
 
+#### Local
+
 1. Execute the following inside terminal:
 ```shell
 npm run debug
 ```
-1. Open debug view in vscode sidebar and choose **Nodemon** from the configuration dropdown.
-1. Press **F5** on the keyboard to start the debugging session
+1. Wait for webpack compilation to finish.
+1. Open debug view in vscode sidebar and choose **Local: Attach to Node** from the configuration dropdown.
+1. Start the debugger by pressing `F5`.
 
 This configuration will attach the vscode debugger to the running node express server. Any changes to /src/server will automatically restart the web server and any breakpoints set in JavaScript files under this directory will cause vscode to pause execution. At the same time, any changes to /src/client files will automatically trigger the Hot Module Reloading (HMR) in ReactJS and update the relevant components in the client application.
 
-Note though that in this approach, the debugger is attached after the server has already initailized once. If there are errors in the server initialization, the web application will crash before any breakpoints are hit. In scenarios like this, it is better to use Option 2.
+This will start the web application in a docker environment and allows remote debugging. Note that the website will not start until a debugger is attached. This allows the developer to debug the application startup code.
+
+#### Docker
+
+1. Execute the following inside the
+```shell
+docker-compose -f docker-compose.debug.yml up --build
+```
+1. Wait for the docker container to finish setting up and for webpack compilation to finish.
+1. Open debug view in vscode sidebar and choose **Docker: Attach to Node** from the configuration dropdown.
+1. Start the debugger by pressing `F5`.
+
+This will start the web application in a docker environment and allows remote debugging. The debugging experience will be similar to that of debugging locally.
 
 ### Docker cleanup
 To clean up docker containers:
@@ -147,6 +162,7 @@ Make sure the correct environment variables are set up
 - ES6
 - Babel
 - Webpack
+- Docker
 - Nodemon
 - Hot Module Replacement (HMR)
 - Redux
@@ -154,9 +170,7 @@ Make sure the correct environment variables are set up
 - Helmet
 - Winston
 - Jest
-- Docker
 
 # TODO
 - UI testing framework (Selenium/TestCafe)
 - Update deployment guide
-- Enable debugging in Docker environment

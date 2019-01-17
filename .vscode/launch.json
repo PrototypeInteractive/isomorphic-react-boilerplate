@@ -6,26 +6,22 @@
     "configurations": [
         {
             "type": "node",
-            "request": "launch",
-            "name": "Nodemon",
-            "runtimeExecutable": "nodemon",
-            "args": [
-                "--ignore client.bundle.js"
-            ],
-            "program": "${workspaceFolder}/dist/server/index.js",
-            "restart": true,
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "env": {
-                "NODE_ENV": "development",
-                "LOG_LEVEL": "debug",
-                "DEBUG": "api",
-            }
+            "request": "attach",
+            "name": "Docker: Attach to Node",
+            "remoteRoot": "/usr/src/app",
+            "restart": true
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Local: Attach to Node",
+            "port": 9229,
+            "restart": true
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Local: Launch Program",
             "program": "${workspaceFolder}/dist/server/index.js",
             "env": {
                 "NODE_ENV": "development",
