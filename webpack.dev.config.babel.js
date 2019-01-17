@@ -155,14 +155,30 @@ export const serverConfig = env => {
   if (env) {
     if (env.dev) {
       plugins.push(new WebpackShellPlugin({
-        onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --ignore client.bundle.js dist/server/index.js'],
+        onBuildEnd: [`
+          cross-env
+            NODE_ENV=development
+            DEBUG=api
+          nodemon
+            --ignore client.bundle.js
+            dist/server/index.js
+        `.replace(/\s+/g, ' ').trim()],
         dev: true
       }));
     }
     else if (env.debug) {
       plugins.push(new WebpackShellPlugin({
         // Use kill-port to avoid issue when autorestarting the web application while debugging inside a docker container
-        onBuildEnd: ['cross-env NODE_ENV=development DEBUG=api nodemon --delay 80ms --watch ./dist/server/index.js --exec \'kill-port --port 9229 && node --inspect-brk=0.0.0.0:9229 ./dist/server/index.js\''],
+        // Reference: https://github.com/remy/nodemon/issues/1050#issuecomment-323680697
+        onBuildEnd: [`
+          cross-env
+            NODE_ENV=development
+            DEBUG=api
+          nodemon
+            --delay 80ms
+            --watch ./dist/server/index.js
+            --exec 'kill-port --port 9229 && node --inspect-brk=0.0.0.0:9229 ./dist/server/index.js'
+        `.replace(/\s+/g, ' ').trim()],
         dev: true
       }));
     }
