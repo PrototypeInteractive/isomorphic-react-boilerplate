@@ -29,7 +29,7 @@ logger.info('☕️ ');
 logger.info('Starting Server');
 logger.info(`Environment: ${process.env.NODE_ENV}`);
 
-const preferredPort = process.env.PORT || 8080;
+const preferredPort = process.env.PORT || 3000;
 
 app.listen(preferredPort, (error) => {
   if (!error) {
