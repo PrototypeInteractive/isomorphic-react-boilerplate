@@ -27,12 +27,12 @@ const commonStylesheetLoaders = [
 
 const baseConfig = {
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(t|j)s$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {

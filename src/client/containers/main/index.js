@@ -11,6 +11,7 @@ import CheckIcon from '../../assets/icons/check.svg';
 import { setVersion } from '../../state/app-data/actions';
 import { setName } from '../../state/user-data/actions';
 import style from './style.scss';
+import FakeClass from './FakeClass'
 
 export class Main extends Component {
   static propTypes = {
@@ -35,6 +36,7 @@ export class Main extends Component {
     this.onButtonClick = this.onButtonClick.bind(this);
     this.onButton2Click = this.onButton2Click.bind(this);
     this.onButton3Click = this.onButton3Click.bind(this);
+    this.onButton4Click = this.onButton4Click.bind(this);
   }
 
   onButtonClick(e) {
@@ -56,6 +58,15 @@ export class Main extends Component {
 
     e.preventDefault();
     setVersion('1.2.3');
+  }
+
+  onButton4Click(e) {
+    const { appData } = this.props;
+    e.preventDefault();
+
+    let fk = new FakeClass();
+    let response = fk.addSuffix(appData.labels.LocalizedTitle);
+    console.log(response);
   }
 
   render() {
@@ -86,6 +97,7 @@ export class Main extends Component {
                 <div><Button label="Change title (state)" onClick={this.onButtonClick} /></div>
                 <div><Button label="Change name (redux)" onClick={this.onButton2Click} /></div>
                 <div><Button label="Change version (redux)" onClick={this.onButton3Click} /></div>
+                <div><Button label="Invoke TypeScript code" onClick={this.onButton4Click} /></div>
                 <br />
                 <div><Link to={`${basePath}/inner-page`}>Inner page</Link></div>
                 <div><Link to={`${rootPath}/`}>English</Link></div>
