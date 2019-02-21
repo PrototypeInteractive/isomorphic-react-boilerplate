@@ -3,6 +3,7 @@
  */
 
 import axios from 'axios';
+import 'babel-polyfill';
 
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 

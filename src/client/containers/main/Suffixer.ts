@@ -1,4 +1,4 @@
-export default class FakeClass {
+export default class Suffixer {
   constructor() {
     console.log('New class constructed');
   }
@@ -6,6 +6,6 @@ export default class FakeClass {
 
   addSuffix(innerText : string) : string {
     console.log('Add suffix to incoming argument');
-    return innerText + ' - suffix';
+    return innerText + ' - beta';
   }
 }

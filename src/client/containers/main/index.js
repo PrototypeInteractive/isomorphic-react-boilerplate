@@ -11,7 +11,7 @@ import CheckIcon from '../../assets/icons/check.svg';
 import { setVersion } from '../../state/app-data/actions';
 import { setName } from '../../state/user-data/actions';
 import style from './style.scss';
-import FakeClass from './FakeClass'
+import Suffixer from './Suffixer';
 
 export class Main extends Component {
   static propTypes = {
@@ -61,12 +61,13 @@ export class Main extends Component {
   }
 
   onButton4Click(e) {
-    const { appData } = this.props;
+    const { appData, setVersion } = this.props;
     e.preventDefault();
 
-    let fk = new FakeClass();
-    let response = fk.addSuffix(appData.labels.LocalizedTitle);
+    let fk = new Suffixer();
+    let response = fk.addSuffix('1.2.3');
     console.log(response);
+    setVersion(response);
   }
 
   render() {
@@ -97,7 +98,7 @@ export class Main extends Component {
                 <div><Button label="Change title (state)" onClick={this.onButtonClick} /></div>
                 <div><Button label="Change name (redux)" onClick={this.onButton2Click} /></div>
                 <div><Button label="Change version (redux)" onClick={this.onButton3Click} /></div>
-                <div><Button label="Invoke TypeScript code" onClick={this.onButton4Click} /></div>
+                <div><Button label="Change version (redux) - typescript" onClick={this.onButton4Click} /></div>
                 <br />
                 <div><Link to={`${basePath}/inner-page`}>Inner page</Link></div>
                 <div><Link to={`${rootPath}/`}>English</Link></div>
